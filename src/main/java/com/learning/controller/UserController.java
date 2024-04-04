@@ -44,8 +44,7 @@ public class UserController {
 //		return "register-user";
 //	}
 
-
-	@RequestMapping("/login")
+	@GetMapping({"/login",  "/"})
 	public String showLogin() {
 		return "loginform";
 	}
@@ -69,7 +68,7 @@ public class UserController {
 		else {
 			System.out.println("login that bai");
 			model.addAttribute("ERROR", "Username or Password not exist");
-			return "login";
+			return "loginform";
 		}
 		
 	}
