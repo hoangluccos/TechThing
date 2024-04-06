@@ -44,38 +44,5 @@ public class UserController {
 //		return "register-user";
 //	}
 
-	@GetMapping({"/login",  "/"})
-	public String showLogin() {
-		return "loginform";
-	}
-//try with @pathvariable
-	@PostMapping("/checklogin")
-	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-			@RequestParam("password") String password , HttpSession session)  {
-		if (userService.checkLogin(username, password)) {
-			if(userService.authorization(username, password)) {
-//				System.out.println("login thanh cong");
-				//Authorization here
-				//true la admin
-				return "admin/home";
-			}
-			else {
-//			System.out.println("login thanh cong");
-//			day la user/home
-			return "index";
-			}
-		}
-		else {
-			System.out.println("login that bai");
-			model.addAttribute("ERROR", "Username or Password not exist");
-			return "loginform";
-		}
-		
-	}
-
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("username");
-		return "login";
-	}
+	
 }
