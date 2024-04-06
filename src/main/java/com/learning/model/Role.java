@@ -1,5 +1,6 @@
 package com.learning.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer role_id;

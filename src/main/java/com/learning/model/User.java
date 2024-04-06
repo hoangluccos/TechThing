@@ -22,7 +22,6 @@ public class User implements Serializable {
 	@Id  
 	private String username;
 
-//	, referencedColumnName = "role_id"
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false )
 	@JsonManagedReference
