@@ -47,20 +47,10 @@ public class ProductController {
 		return "admin/edit_product";
 	}
 	
-	@PostMapping("/products/{id}")
-	public String updateStudent(@PathVariable Integer id,
+	@PostMapping("/products/save")
+	public String updateStudent(
 			@ModelAttribute("product") Product product) {
-			Optional<Product> existingProductOptional = productService.findById(id);
-	        Product existingProduct = existingProductOptional.get();
-	        existingProduct.setProduct_id(product.getProduct_id());
-	        existingProduct.setSaleoff_id(product.getSaleoff_id());
-	        existingProduct.setTypeofproduct_id(product.getTypeofproduct_id());
-	        existingProduct.setProduct_name(product.getProduct_name());
-	        existingProduct.setQuantity(product.getQuantity());
-	        existingProduct.setPrice(product.getPrice());
-	        existingProduct.setProduct_desc(product.getProduct_desc());
-	        
-	        productService.save(existingProduct); // Lưu thông tin sản phẩm đã cập nhật
+	        productService.save(product); // Lưu thông tin sản phẩm đã cập nhật
 	        return "redirect:/product"; // Chuyển hướng về trang danh sách sản phẩm	
 	}
 	
