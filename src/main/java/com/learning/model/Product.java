@@ -26,7 +26,7 @@ public class Product implements Serializable {
 	
 	private Integer quantity;
 	
-	private Double price;
+	private int price;
 	
 	private String product_desc;
 
@@ -70,11 +70,11 @@ public class Product implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public Double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -87,7 +87,7 @@ public class Product implements Serializable {
 	}
 
 	public Product(Integer product_id, Integer saleoff_id, Integer typeofproduct_id, String product_name,
-			Integer quantity, Double price, String product_desc) {
+			Integer quantity, int price, String product_desc) {
 		super();
 		this.product_id = product_id;
 		this.saleoff_id = saleoff_id;

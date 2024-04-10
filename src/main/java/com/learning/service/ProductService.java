@@ -30,5 +30,4 @@ public interface ProductService {
 	List<Product> saveAll(List<Product> entities);
 
 	Product save(Product entity);
-
 }
