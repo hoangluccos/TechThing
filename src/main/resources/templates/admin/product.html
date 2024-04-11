@@ -79,10 +79,10 @@
                             <td th:text="${product.product_desc}"></td>
 							<td style="display: flex; gap: 5px;">
 								<a
-								th:href="@{/product/edit/{id}(id=${product.product_id})}"
+								th:href="@{/admin/product/edit/{id}(id=${product.product_id})}"
 								class="btn btn-primary btn-sm">Update</a> 
 								<a
-								th:href="@{/product/{id}(id=${product.product_id})}"
+								th:href="@{/admin/product/delete/{id}(id=${product.product_id})}"
 								class="btn btn-danger btn-sm">Delete</a>
 							</td>
 						</tr>
@@ -90,7 +90,7 @@
 				</table>
 				<div class="row">
 					<div class="col-lg-3">
-						<a th:href="@{/product/new}" class="btn btn-primary btn-sm mb-3">Add Product</a> 
+						<a th:href="@{/admin/product/new}" class="btn btn-primary btn-sm mb-3">Add Product</a> 
 					</div>
 				</div>
 			</div>

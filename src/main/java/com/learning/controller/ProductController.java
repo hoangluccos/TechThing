@@ -21,13 +21,13 @@ public class ProductController {
 	ProductService productService;
 	
 	//handle method to handle list product and return model and view
-	@GetMapping("/product")
+	@GetMapping("/admin/product")
 	public String listProducts(Model model) {
 		model.addAttribute("products", productService.findAll());
 		return "admin/product";
 	}
 	
-	@GetMapping("/product/new")
+	@GetMapping("/admin/product/new")
 	public String createProduct(Model model) {
 		//Create product object to hold product from data
 		Product product = new Product();
@@ -35,28 +35,28 @@ public class ProductController {
 		return "admin/create_product";
 	}
 
-	@PostMapping("/products")
+	@PostMapping("/admin/product/save_new")
 	public String saveProduct(@ModelAttribute("product") Product entity) {
 		productService.save(entity);
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 	
-	@GetMapping("/product/edit/{id}")
+	@GetMapping("/admin/product/edit/{id}")
 	public String editStudent(@PathVariable Integer id, Model model) {
 		model.addAttribute("product", productService.findById(id));
 		return "admin/edit_product";
 	}
 	
-	@PostMapping("/products/save")
+	@PostMapping("/admin/product/save_edit")
 	public String updateStudent(
 			@ModelAttribute("product") Product product) {
 	        productService.save(product); // Lưu thông tin sản phẩm đã cập nhật
-	        return "redirect:/product"; // Chuyển hướng về trang danh sách sản phẩm	
+	        return "redirect:/admin/product"; // Chuyển hướng về trang danh sách sản phẩm	
 	}
 	
-	@GetMapping("/product/{id}")
+	@GetMapping("/admin/product/delete/{id}")
 	public String deleteProduct(@PathVariable int id) {
 		productService.deleteById(id);
-		return "redirect:/product";
+		return "redirect:/admin/product";
 	}
 }
