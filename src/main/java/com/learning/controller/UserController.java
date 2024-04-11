@@ -26,11 +26,25 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/user")
+	@GetMapping("/admin/user")
 	public String listUser(Model model)
 	{
+		model.addAttribute("users", userService.findAll());
 		return "admin/user";
 	}
+	
+	@GetMapping("/user/user_info/{id}")
+	public String userInfo(@PathVariable String id, Model model)
+	{
+		model.addAttribute("users", userService.findById(id));
+		return "user/user_info";
+	}
+	
+	/*
+	 * @GetMapping("/user/user_info/edit/{id}") public String
+	 * userEditInfo(@PathVariable String id, Model model) { model.addAttribute(id,
+	 * model) }
+	 */
 	
 //	@GetMapping("/register")
 //	public String addOrEdit(ModelMap model) {
@@ -49,6 +63,10 @@ public class UserController {
 //		userService.save(user);
 //		return "register-user";
 //	}
-
 	
+	@GetMapping("/admin/user/delete/{id}")
+	public String deleteUser(@PathVariable String id) {
+		userService.deleteById(id);
+		return "redirect:/admin/user";
+	}
 }
