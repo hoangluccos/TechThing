@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <style>
+    td.product-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px; /* Độ rộng tối đa cho product_name */
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px; /* Độ rộng của tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 10px; /* Điều chỉnh khoảng cách tùy thích */
+        }
+
+        td {
+            padding: 10px; /* Điều chỉnh khoảng cách tùy thích */
+        }
+    </style>
+</head>
+<body>
+    <section layout:fragment="body">
+		<div class="container">
+			<div class="row">
+				<h1>List Product</h1>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>SaleOff</th>
+							<th>Type</th>
+							<th>Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Description</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product: ${products}">
+							<td th:text="${product.product_id}"></td>
+							<td th:text="${product.saleoff_id}"></td>
+							<td th:text="${product.typeofproduct_id}"></td>
+							<td class="product-name tooltip" th:text="${product.product_name}">
+                                <span class="tooltiptext" th:text="${product.product_name}"></span>
+                            </td>
+                            <td th:text="${product.quantity}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.product_desc}"></td>
+							<td style="display: flex; gap: 5px;">
+								<a
+								th:href="@{/admin/product/edit/{id}(id=${product.product_id})}"
+								class="btn btn-primary btn-sm">Update</a> 
+								<a
+								th:href="@{/admin/product/delete/{id}(id=${product.product_id})}"
+								class="btn btn-danger btn-sm">Delete</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="col-lg-3">
+						<a th:href="@{/admin/product/new}" class="btn btn-primary btn-sm mb-3">Add Product</a> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

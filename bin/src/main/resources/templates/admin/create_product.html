@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+</head>
+<body>
+	<section layout:fragment="body">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<div class="card-body">
+					<h1 class="text-center">Create New Product</h1>
+						<form th:action="@{/admin/product/save_new}" th:object=" ${product}" method="POST"><!-- de y dong nay -->
+							<!-- <div class="form-group">
+								<label>Product ID</label>
+								<input
+									type="number"
+									name="product_id"
+									th:field="${product.product_id}"
+									class = "form-controll"
+									placeholder="Enter Product ID"
+									/>
+							</div> -->
+ 							<div class="form-group">
+								<label>Safeoff</label>
+								<input
+									type="number"
+									name="saleoff_id"
+									th:field="${product.saleoff_id}"
+									class = "form-controll"
+									placeholder="Enter Safeoff ID"
+									/>
+							</div>
+							<div class="form-group">
+								<label>Type</label>
+								<input
+									type="number"
+									name="typeofproduct_id"
+									th:field="${product.typeofproduct_id}"
+									class = "form-controll"
+									placeholder="Enter TypeofProduct ID"
+									/>
+							</div>
+							<div class="form-group">
+								<label>Name</label>
+								<input
+									type="text"
+									name="product_name"
+									th:field="${product.product_name}"
+									class = "form-controll"
+									placeholder="Enter Product Name"
+									/>
+							</div>
+							<div class="form-group">
+								<label>Quantity</label>
+								<input
+									type="number"
+									name="quantity"
+									th:field="${product.quantity}"
+									class = "form-controll"
+									placeholder="Enter Quantity"
+									/>
+							</div>
+							<div class="form-group">
+								<label>Price</label>
+								<input
+									type="number"
+									name="price"
+									th:field="${product.price}"
+									class = "form-controll"
+									placeholder="Enter Price"
+									/>
+							</div>
+							<div class="form-group">
+								<label>Description</label>
+								<input
+									type="text"
+									name="product_desc"
+									th:field="${product.product_desc}"
+									class = "form-controll"
+									placeholder="Enter Description"
+									/>
+							</div>
+							<div class ="box-footer">
+								<button type="submit" class = "btn btn-primary">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
