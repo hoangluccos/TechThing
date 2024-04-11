@@ -26,10 +26,10 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/user")
+	@GetMapping("/user/home")
 	public String listUser(Model model)
 	{
-		return "admin/user";
+		return "user/index";
 	}
 	
 //	@GetMapping("/register")
