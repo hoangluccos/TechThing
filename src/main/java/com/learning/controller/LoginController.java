@@ -1,6 +1,7 @@
 package com.learning.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.learning.model.Role;
 import com.learning.model.User;
+import com.learning.service.ProductService;
 import com.learning.service.RoleService;
 import com.learning.service.UserService;
 
@@ -28,6 +30,9 @@ public class LoginController {
 	
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	ProductService productService;
 	
 	@GetMapping({"/login",  "/"})
 	public String showLogin(ModelMap model) {
@@ -55,7 +60,7 @@ public class LoginController {
 	//try with @pathvariable
 	@PostMapping("/checklogin")
 	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-			@RequestParam("password") String password , HttpSession session)  {
+			@RequestParam("password") String password , HttpSession session, Model model1)  {
 		if (userService.checkLogin(username, password)) {
 			if(userService.authorization(username, password)) {
 //				System.out.println("login thanh cong");
@@ -66,6 +71,7 @@ public class LoginController {
 			else {
 //			System.out.println("login thanh cong");
 //			day la user/home
+			model.addAttribute("products", productService.findAll());
 			return "user/index";
 			}
 		}
