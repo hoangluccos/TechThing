@@ -46,7 +46,7 @@ public class LoginController {
 //		dao.save(user);	
 		int role_id = 2;
 		Role role = roleService.findById(2).get();
-		user.setRole(role);
+//		user.setRole(role);
 		userService.save(user);
 		System.out.println("Thanh cong");
 		return "log_regform";
@@ -54,28 +54,7 @@ public class LoginController {
 
 	// try with @pathvariable
 	@PostMapping("/checklogin")
-	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-			@RequestParam("password") String password, HttpSession session) {
-		if (userService.checkLogin(username, password)) {
-			if (userService.authorization(username, password)) {
-//				System.out.println("login thanh cong");
-				// Authorization here
-				// true la admin
-				return "redirect:/admin";
-			} else {
-//			System.out.println("login thanh cong");
-//			day la user/home
-				return "redirect:/user/home";
-//			return "user/index";
-			}
-		} else {
-			System.out.println("login that bai");
-			model.addAttribute("ERROR", "Username or Password not exist");
-//			return "loginform";
-			return "log_regform";
-		}
-
-	}
+	public void checkLogin() {}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
