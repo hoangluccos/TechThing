@@ -73,8 +73,8 @@ public class LoginController {
 //			System.out.println("login thanh cong");
 //			day la user/home
 			model.addAttribute("products", productService.findAll());
-      return "redirect:/user/home";
-//			return "user/index";
+//			return "redirect:/user/home";
+			return "user/index";
 
 
 			}
