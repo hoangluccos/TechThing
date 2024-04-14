@@ -62,6 +62,10 @@ public class UserController {
 //		userService.save(user);
 //		return "register-user";
 //	}
+
+	//System.out.println("Test pull ne");
+
+
 	
 	@GetMapping("/admin/user/delete/{id}")
 	public String deleteUser(@PathVariable String id) {
@@ -76,5 +80,6 @@ public class UserController {
 		model.addAttribute("users", userService.findById(id));
 		return "user/user_info";
 	}
+
 	
 }
