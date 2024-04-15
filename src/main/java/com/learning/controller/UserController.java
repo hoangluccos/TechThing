@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.learning.model.Product;
 import com.learning.model.User;
+import com.learning.service.ProductService;
 import com.learning.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,12 +27,23 @@ import java.util.Optional;
 public class UserController {
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+    private ProductService productService;
 
-	@GetMapping("/user/home")
+	@GetMapping("/admin/user")
 	public String listUser(Model model)
 	{
-		return "user/index";
+		model.addAttribute("users", userService.findAll());
+		return "admin/user";
+
 	}
+	
+	/*
+	 * @GetMapping("/user/user_info/edit/{id}") public String
+	 * userEditInfo(@PathVariable String id, Model model) { model.addAttribute(id,
+	 * model) }
+	 */
 	
 //	@GetMapping("/register")
 //	public String addOrEdit(ModelMap model) {
@@ -49,6 +62,19 @@ public class UserController {
 //		userService.save(user);
 //		return "register-user";
 //	}
-
+	
+	@GetMapping("/admin/user/delete/{id}")
+	public String deleteUser(@PathVariable String id) {
+		userService.deleteById(id);
+		return "redirect:/admin/user";
+	}
+	
+	
+	@GetMapping("/user/user_info/{id}")
+	public String userInfo(@PathVariable String id, Model model)
+	{
+		model.addAttribute("users", userService.findById(id));
+		return "user/user_info";
+	}
 	
 }
