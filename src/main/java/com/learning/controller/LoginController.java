@@ -36,7 +36,6 @@ public class LoginController {
 	ProductService productService;
 	
 	@GetMapping({"/login",  "/"})
-
 	public String showLogin(ModelMap model) {
 		User u = new User();
 //		u.setUsername("");
@@ -52,7 +51,7 @@ public class LoginController {
 //		dao.save(user);	
 		int role_id = 2;
 		Role role = roleService.findById(2).get();
-		user.setRole(role);
+//		user.setRole(role);
 		userService.save(user);
 		System.out.println("Thanh cong");
 		return "log_regform";
@@ -60,6 +59,8 @@ public class LoginController {
 
 	// try with @pathvariable
 	@PostMapping("/checklogin")
+	public void checkLogin() {}
+
 	public String checkLogin(ModelMap model, @RequestParam("username") String username,
 			@RequestParam("password") String password , HttpSession session, Model model1)  {
 

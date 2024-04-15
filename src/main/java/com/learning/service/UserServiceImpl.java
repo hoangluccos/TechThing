@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
 	public long count() {
 		return userRepository.count();
 	}
@@ -90,13 +95,13 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public boolean authorization(String username, String password) {
-		//true la admin 
-		// false la user
-		Optional<User> optionalUser = findById(username);
-		// khong can vi chac chan la ton tai tai khoan roi`
-		if(optionalUser.get().getRole().getRole_id().equals(1)) {
-			return true;
-		}
+//		//true la admin
+//		// false la user
+//		Optional<User> optionalUser = findById(username);
+//		// khong can vi chac chan la ton tai tai khoan roi`
+//		if(optionalUser.get().getRole().getRole_id().equals(1)) {
+//			return true;
+//		}
 		return false;
 	}
 }
