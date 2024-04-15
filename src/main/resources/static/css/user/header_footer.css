@@ -88,7 +88,7 @@ a {
 }
 /* ============ Body ============ */
 .body {
-  height: 500px;
+  min-height: 500px;
   background: #50b07c;
 }
 /* ============ Footer ============ */

@@ -2,6 +2,7 @@ package com.learning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.learning.model.Role;
 import com.learning.model.User;
+import com.learning.service.ProductService;
 import com.learning.service.RoleService;
 import com.learning.service.UserService;
 
@@ -29,8 +31,11 @@ public class LoginController {
 
 	@Autowired
 	RoleService roleService;
-
-	@GetMapping({ "/login", "/" })
+	
+	@Autowired
+	ProductService productService;
+	
+	@GetMapping({"/login",  "/"})
 	public String showLogin(ModelMap model) {
 		User u = new User();
 //		u.setUsername("");
@@ -55,6 +60,33 @@ public class LoginController {
 	// try with @pathvariable
 	@PostMapping("/checklogin")
 	public void checkLogin() {}
+
+	public String checkLogin(ModelMap model, @RequestParam("username") String username,
+			@RequestParam("password") String password , HttpSession session, Model model1)  {
+
+		if (userService.checkLogin(username, password)) {
+			if (userService.authorization(username, password)) {
+//				System.out.println("login thanh cong");
+				// Authorization here
+				// true la admin
+				return "redirect:/admin";
+			} else {
+//			System.out.println("login thanh cong");
+//			day la user/home
+			model.addAttribute("products", productService.findAll());
+//			return "redirect:/user/home";
+			return "user/index";
+
+
+			}
+		} else {
+			System.out.println("login that bai");
+			model.addAttribute("ERROR", "Username or Password not exist");
+//			return "loginform";
+			return "log_regform";
+		}
+
+	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
