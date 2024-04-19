@@ -69,12 +69,4 @@ public class UserController {
 		return "redirect:/admin/user";
 	}
 	
-	
-	@GetMapping("/user/user_info/{id}")
-	public String userInfo(@PathVariable String id, Model model)
-	{
-		model.addAttribute("users", userService.findById(id));
-		return "user/user_info";
-	}
-	
 }

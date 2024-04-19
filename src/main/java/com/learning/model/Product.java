@@ -1,12 +1,14 @@
 package com.learning.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,7 +31,10 @@ public class Product implements Serializable {
 	private int price;
 	
 	private String product_desc;
-
+	
+	@OneToMany(mappedBy = "product")
+	private List<Cart> carts;
+	
 	public Integer getProduct_id() {
 		return product_id;
 	}

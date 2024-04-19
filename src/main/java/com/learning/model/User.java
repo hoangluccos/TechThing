@@ -1,6 +1,7 @@
 package com.learning.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +35,9 @@ public class User implements Serializable {
 	
 	private String mail;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Cart> carts;
 	
-
 	public String getUsername() {
 		return username;
 	}

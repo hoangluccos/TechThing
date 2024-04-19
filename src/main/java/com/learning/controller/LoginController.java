@@ -17,6 +17,7 @@ import com.learning.service.ProductService;
 import com.learning.service.RoleService;
 import com.learning.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
 
@@ -36,14 +37,17 @@ public class LoginController {
 	ProductService productService;
 	
 	@GetMapping({"/login",  "/"})
-
-	public String showLogin(ModelMap model) {
-		User u = new User();
+	public String showLogin(ModelMap model, HttpServletRequest request) {
+		if(request.getSession().getAttribute("user") != null)
+			return "user/index";
+		else {			
+			User u = new User();
 //		u.setUsername("");
-		model.addAttribute("USER", u);
-		model.addAttribute("ACTION", "/saveOrUpdate");
+			model.addAttribute("USER", u);
+			model.addAttribute("ACTION", "/saveOrUpdate");
 //		return "loginform";
-		return "log_regform";
+			return "log_regform";
+		}
 	}
 
 	@PostMapping("/saveOrUpdate")
@@ -61,9 +65,12 @@ public class LoginController {
 	// try with @pathvariable
 	@PostMapping("/checklogin")
 	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-			@RequestParam("password") String password , HttpSession session, Model model1)  {
+			@RequestParam("password") String password , HttpServletRequest request, Model model1)  {
 
 		if (userService.checkLogin(username, password)) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("username", username);
+			session.setMaxInactiveInterval(3600*24);
 			if (userService.authorization(username, password)) {
 //				System.out.println("login thanh cong");
 				// Authorization here

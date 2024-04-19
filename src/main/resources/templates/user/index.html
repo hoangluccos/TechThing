@@ -17,7 +17,9 @@
 			<p class="saleoff">[[${product.saleoff_id}]] </p>
 			<h3 class="title">[[${product.product_name}]]</h3>
 			<p class="price">[[${product.price}]]</p>
-			<a class="btn-addcart" href="#"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+			<a class="btn-addcart" th:href="@{/user/cart/add/{productId}(productId=${product.product_id})}">
+                <i class="fas fa-cart-plus"></i> Add to Cart
+            </a>
 		</div>
 	</div>
 	</div>
