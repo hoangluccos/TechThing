@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <link rel="stylesheet" 	th:href="@{/css/user/header_footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/user/header_footer.css}"/>
     <title>Document</title>
-  </head>
-  <body>
-    <header class="content">
-      <div class="header">
-        <img th:src="@{'../../img/logo.png'}" alt="Logo" />
+</head>
+<body>
+<header class="content">
+    <div class="header">
+        <img th:src="@{'../../img/logo.png'}" alt="Logo"/>
         <div class="btn search">
-          <i class="fas fa-search"></i>
+            <i class="fas fa-search"></i>
         </div>
         <div class="action">
           <div class="btn action-btn">
@@ -27,49 +27,58 @@
             	<i class="fas fa-user"></i>
             </a>
           </div>
+
+            <div class="btn action-btn">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="btn action-btn">
+                <a href="/user/user_info/{id}">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
         </div>
-      </div>
-
-      <div class="nav">
-        <ul>
-          <li class="btn"><i class="fas fa-home"></i> Home</li>
-          <li class="btn"><i class="fas fa-laptop"></i> Laptop</li>
-          <li class="btn"><i class="fas fa-mobile"></i> Phone</li>
-          <li class="btn"><i class="fas fa-tablet"></i> Tablet</li>
-          <li class="btn">
-            <img th:src="@{'../../img/watch.png'}" alt="watch" /> Watch
-          </li>
-          <li class="btn"><i class="fas fa-desktop"></i> Screen</li>
-        </ul>
-      </div>
-      <div class="banner"></div>
-    </header>
-    <div class="body content" layout:fragment="body"></div>
-
-    <div class="footer content">
-      <div class="payment">
-        <ul>
-          <li>Hỗ trợ thanh toán</li>
-          <li>Thanh toán visa</li>
-          <li>Thanh toán ATM</li>
-          <li>Thanh toán trực tiếp</li>
-        </ul>
-      </div>
-      <div class="advise">
-        <ul>
-          <li>Tư vấn khách hàng</li>
-          <li>Kỹ thuật : 0123456</li>
-          <li>Mua hàng : 0123456</li>
-          <li>Chi nhánh : 0123456</li>
-        </ul>
-      </div>
-      <div class="branch">
-        <ul>
-          <li>Chi nhánh</li>
-          <li>Chi nhánh 1:Số 1 Võ Văn Ngân, Thủ đức</li>
-          <li>Chi nhánh 2:Số 1 Võ Văn Ngân, Thủ đức</li>
-        </ul>
-      </div>
     </div>
-  </body>
+
+    <div class="nav">
+        <ul>
+            <li class="btn"><i class="fas fa-home"></i> <a href="/user/home" >Home</a></li>
+            <li class="btn"><i class="fas fa-laptop"></i> <a href="#">Laptop</a></li>
+            <li class="btn"><i class="fas fa-mobile"></i> <a href="#">Phone</a></li>
+            <li class="btn"><i class="fas fa-tablet"></i> <a href="#">Tablet</a></li>
+            <li class="btn">
+                <img th:src="@{'../../img/watch.png'}" alt="watch"/> <a href="#">Watch</a>
+            </li>
+            <li class="btn"><i class="fas fa-desktop"></i> <a href="">Screen</a></li>
+        </ul>
+    </div>
+    <div class="banner"></div>
+</header>
+<div class="body content" layout:fragment="body"></div>
+
+<div class="footer content">
+    <div class="payment">
+        <ul>
+            <li>Hỗ trợ thanh toán</li>
+            <li>Thanh toán visa</li>
+            <li>Thanh toán ATM</li>
+            <li>Thanh toán trực tiếp</li>
+        </ul>
+    </div>
+    <div class="advise">
+        <ul>
+            <li>Tư vấn khách hàng</li>
+            <li>Kỹ thuật : 0123456</li>
+            <li>Mua hàng : 0123456</li>
+            <li>Chi nhánh : 0123456</li>
+        </ul>
+    </div>
+    <div class="branch">
+        <ul>
+            <li>Chi nhánh</li>
+            <li>Chi nhánh 1:Số 1 Võ Văn Ngân, Thủ đức</li>
+            <li>Chi nhánh 2:Số 1 Võ Văn Ngân, Thủ đức</li>
+        </ul>
+    </div>
+</div>
+</body>
 </html>

@@ -31,6 +31,8 @@ public class UserController {
 	@Autowired
     private ProductService productService;
 
+
+
 	@GetMapping("/admin/user")
 	public String listUser(Model model)
 	{
@@ -39,11 +41,19 @@ public class UserController {
 
 	}
 	
-	/*
-	 * @GetMapping("/user/user_info/edit/{id}") public String
-	 * userEditInfo(@PathVariable String id, Model model) { model.addAttribute(id,
-	 * model) }
-	 */
+	@GetMapping("/user/home")
+	public String userHome(Model model)
+	{
+		model.addAttribute("products", productService.findAll());
+		return "user/index";
+	}
+	
+	
+	
+//	  @GetMapping("/user/user_info/edit/{id}") public String
+//	  userEditInfo(@PathVariable String id, Model model) { model.addAttribute(id,
+//	 model) }
+	
 	
 //	@GetMapping("/register")
 //	public String addOrEdit(ModelMap model) {

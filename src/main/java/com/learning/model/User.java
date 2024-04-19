@@ -2,11 +2,12 @@ package com.learning.model;
 
 import java.io.Serializable;
 import java.util.List;
-
+import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.ManyToAny;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,11 +19,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
 @Table(name = "users")
 public class User implements Serializable {
-	@Id  
-	private String username;
+    @Id
+    private String username;
 
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false )
@@ -41,57 +46,13 @@ public class User implements Serializable {
 	public String getUsername() {
 		return username;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserRole> userRoles;
 
-	public String getFullname() {
-		return fullname;
-	}
+    public User() {
+        super();
+    }
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public User(String username, Integer role_id, String password, String fullname, String mail, Role role) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.fullname = fullname;
-		this.mail = mail;
-		this.role = role;
-	}
-
-	public User() {
-		super();
-	}
-
-	
-	
-	
 }

@@ -56,7 +56,7 @@ public class LoginController {
 //		dao.save(user);	
 		int role_id = 2;
 		Role role = roleService.findById(2).get();
-		user.setRole(role);
+//		user.setRole(role);
 		userService.save(user);
 		System.out.println("Thanh cong");
 		return "log_regform";
@@ -64,6 +64,8 @@ public class LoginController {
 
 	// try with @pathvariable
 	@PostMapping("/checklogin")
+	public void checkLogin() {}
+
 	public String checkLogin(ModelMap model, @RequestParam("username") String username,
 			@RequestParam("password") String password , HttpServletRequest request, Model model1)  {
 
@@ -79,9 +81,9 @@ public class LoginController {
 			} else {
 //			System.out.println("login thanh cong");
 //			day la user/home
-			model.addAttribute("products", productService.findAll());
-//			return "redirect:/user/home";
-			return "user/index";
+//			model.addAttribute("products", productService.findAll());
+			return "redirect:/user/home";
+//			return "user/index";
 
 
 			}
