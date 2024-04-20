@@ -19,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.save(entity);
 	}
 
+
+	@Override
+	public List<Product> findProductsByType(Integer id) {
+		return productRepository.findByType(id);
+	}
 	@Override
 	public List<Product> saveAll(List<Product> entities) {
 		return (List<Product>)productRepository.saveAll(entities);
@@ -28,6 +33,9 @@ public class ProductServiceImpl implements ProductService {
 	public Optional<Product> findById(Integer id) {
 		return productRepository.findById(id);
 	}
+
+
+
 
 	@Override
 	public boolean existsById(Integer id) {
@@ -73,5 +81,6 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteAll() {
 		productRepository.deleteAll();
 	}
-	
+
+
 }

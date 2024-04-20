@@ -68,14 +68,10 @@ public class LoginController {
 			if (userService.authorization(username, password)) {
 //				System.out.println("login thanh cong");
 				// Authorization here
-				// true la admin
 				return "redirect:/admin";
 			} else {
-//			System.out.println("login thanh cong");
 //			day la user/home
-//			model.addAttribute("products", productService.findAll());
 			return "redirect:/user/home";
-//			return "user/index";
 
 
 			}

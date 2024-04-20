@@ -2,12 +2,7 @@ package com.learning.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,9 +18,12 @@ public class Product implements Serializable {
 	private Integer product_id;
 	
 	private Integer saleoff_id;
-	
+
+
+	@ManyToOne
+	@JoinColumn(name = "typeofproduct_id",nullable=false)
 	//cho nay can phai manytoone
-	private Integer typeofproduct_id;
+	private TypeOfProducts typeofproducts;
 	
 	private String product_name;
 	
@@ -35,12 +33,10 @@ public class Product implements Serializable {
 	
 	private String product_desc;
 
-	public Product(Integer product_id, Integer saleoff_id, Integer typeofproduct_id, String product_name,
-			Integer quantity, int price, String product_desc) {
-		super();
+	public Product(Integer product_id, Integer saleoff_id, TypeOfProducts typeofproducts, String product_name, Integer quantity, int price, String product_desc) {
 		this.product_id = product_id;
 		this.saleoff_id = saleoff_id;
-		this.typeofproduct_id = typeofproduct_id;
+		this.typeofproducts = typeofproducts;
 		this.product_name = product_name;
 		this.quantity = quantity;
 		this.price = price;

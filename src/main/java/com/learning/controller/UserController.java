@@ -39,10 +39,52 @@ public class UserController {
 		return "user/index";
 
 	}
+	//category laptop
+	@GetMapping("/user/category/laptop")
+	public String category_laptop(Model model)
+	{
+		Integer id = 1;
+		model.addAttribute("products", productService.findProductsByType(id));
+		return "user/index";
+
+	}
+	@GetMapping("/user/category/phone")
+	public String category_phone(Model model)
+	{
+		Integer id = 2;
+		model.addAttribute("products", productService.findProductsByType(id));
+		return "user/index";
+
+	}
+	@GetMapping("/user/category/tablet")
+	public String category_tablet(Model model)
+	{
+		Integer id = 3;
+		model.addAttribute("products", productService.findProductsByType(id));
+		return "user/index";
+
+	}
+	@GetMapping("/user/category/watch")
+	public String category_watch(Model model)
+	{
+		Integer id = 4;
+		model.addAttribute("products", productService.findProductsByType(id));
+		return "user/index";
+
+	}
+	@GetMapping("/user/category/pc")
+	public String category_pc(Model model)
+	{
+		Integer id = 5;
+		model.addAttribute("products", productService.findProductsByType(id));
+		return "user/index";
+
+	}
 
 
 
-	//Belong to Admin
+
+	//--------------------Belong to Admin--------------------
 	@GetMapping("/admin/user")
 	public String listUser(Model model)
 	{
