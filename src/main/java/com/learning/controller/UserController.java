@@ -31,6 +31,18 @@ public class UserController {
 	@Autowired
     private ProductService productService;
 
+	//user home
+	@GetMapping("/user/home")
+	public String userHome(Model model)
+	{
+		model.addAttribute("products", productService.findAll());
+		return "user/index";
+
+	}
+
+
+
+	//Belong to Admin
 	@GetMapping("/admin/user")
 	public String listUser(Model model)
 	{

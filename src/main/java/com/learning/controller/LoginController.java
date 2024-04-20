@@ -73,9 +73,9 @@ public class LoginController {
 			} else {
 //			System.out.println("login thanh cong");
 //			day la user/home
-			model.addAttribute("products", productService.findAll());
-//			return "redirect:/user/home";
-			return "user/index";
+//			model.addAttribute("products", productService.findAll());
+			return "redirect:/user/home";
+//			return "user/index";
 
 
 			}
