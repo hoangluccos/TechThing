@@ -3,21 +3,36 @@ package com.learning.model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private User user;
-    private Collection<? extends GrantedAuthority> authorities;
+//    private Collection<? extends GrantedAuthority> authorities;
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return authorities;
+//    }
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    Set<Role> roles = user.getRoles();
+    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+    for (Role role : roles) {
+        authorities.add(new SimpleGrantedAuthority(role.getRole_name()));
     }
+
+    return authorities;
+}
+
 
     @Override
     public String getPassword() {

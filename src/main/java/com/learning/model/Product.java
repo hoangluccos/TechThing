@@ -1,6 +1,7 @@
 package com.learning.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,6 +33,9 @@ public class Product implements Serializable {
 	private int price;
 	
 	private String product_desc;
+
+	@OneToMany(mappedBy = "product")
+	private List<Cart> carts;
 
 	public Product(Integer product_id, Integer saleoff_id, TypeOfProducts typeofproducts, String product_name, Integer quantity, int price, String product_desc) {
 		this.product_id = product_id;

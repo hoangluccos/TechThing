@@ -1,6 +1,7 @@
 package com.learning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,8 +34,12 @@ public class UserController {
 
 	//user home
 	@GetMapping("/user/home")
-	public String userHome(Model model)
+	public String userHome(Model model, HttpSession session)
 	{
+//		String x = (String) httpSession.getAttribute("username");
+//		System.out.println("session = " + x);
+		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+		System.out.println(userDetails.getUsername());
 		model.addAttribute("products", productService.findAll());
 		return "user/index";
 

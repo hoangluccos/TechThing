@@ -40,5 +40,6 @@ public interface UserService {
 	boolean checkLogin (String username, String password);
 
 	boolean authorization(String username, String password);
-		
+
+	void registerDefaultUser(User user);
 }

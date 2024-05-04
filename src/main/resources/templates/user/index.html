@@ -12,12 +12,14 @@
 	<div class="body content" layout:fragment="body">
 		<div class="list-item">
 		<div th:each="product :${products}" class="item">
+			<a th:href="@{/product/{id}(id=${product.product_id})}" class="product-link">
 			<img src="https://laptoptld.com/wp-content/uploads/2022/05/Laptop-Acer-Aspire-5-COREI3-2.jpg"
 				alt="Laptop-Acer-Aspire-5-COREI3-2" />
 			<p class="saleoff">[[${product.saleoff_id}]] </p>
 			<h3 class="title">[[${product.product_name}]]</h3>
 			<p class="price">[[${product.price}]] đ</p>
-			<a class="btn-addcart" href="#"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+			</a>
+			<a class="btn-addcart" th:href="@{/cart/add/{productId}(productId=${product.product_id})}"><i class="fas fa-cart-plus"></i> Add to Cart</a>
 		</div>
 	</div>
 	</div>

@@ -15,15 +15,18 @@ import lombok.*;
 @Table(name = "roles")
 public class Role implements Serializable {
     @Id
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer role_id;
 
-    private String role_name;
-
     private String role_desc;
 
-    @OneToMany(mappedBy = "role")
-    private Set<UserRole> userRoles;
+    private String role_name;
+
+
+
+//    @OneToMany(mappedBy = "role")
+//    private Set<UserRole> userRoles;
 
     public Role() {
         super();

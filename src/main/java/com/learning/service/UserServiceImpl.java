@@ -3,6 +3,7 @@ package com.learning.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.learning.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserRepository userRepository;
-	
+
+	@Autowired RoleRepository roleRepo;
 	
 	@Override
 	public User save(User entity) {
@@ -103,5 +105,14 @@ public class UserServiceImpl implements UserService {
 //			return true;
 //		}
 		return false;
+	}
+	@Override
+	public void registerDefaultUser(User user) {
+		System.out.println("Dang gan role");
+		Role role = roleRepo.findById(2).get(); //tao tai khoan mac dinh gan role User
+//		Role role = roleRepo.findById(2).get();
+		user.addRole(role);
+
+		userRepository.save(user);
 	}
 }

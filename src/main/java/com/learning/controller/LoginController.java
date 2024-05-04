@@ -1,5 +1,6 @@
 package com.learning.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,34 +46,26 @@ public class LoginController {
 		return "log_regform";
 	}
 
-	@PostMapping("/saveOrUpdate")
-	public String saveOrUpdate(ModelMap model, @ModelAttribute("USER") User user) {
-//		UserDAO dao = new UserDAO();
-//		dao.save(user);	
-		int role_id = 2;
-		Role role = roleService.findById(2).get();
-//		user.setRole(role);
-		userService.save(user);
-		System.out.println("Thanh cong");
-		return "log_regform";
-	}
 
 	// try with @pathvariable
 	@PostMapping("/checklogin")
 	public void checkLogin() {}
 
 	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-			@RequestParam("password") String password , HttpSession session, Model model1)  {
+							 @RequestParam("password") String password , HttpSession session)  {
 
 		if (userService.checkLogin(username, password)) {
+			session.setAttribute("username", username);
+
 			if (userService.authorization(username, password)) {
 //				System.out.println("login thanh cong");
 				// Authorization here
 				return "redirect:/admin";
 			} else {
 //			day la user/home
-			return "redirect:/user/home";
 
+			return "redirect:/user/home";
+//				return "user/index";
 
 			}
 		} else {
