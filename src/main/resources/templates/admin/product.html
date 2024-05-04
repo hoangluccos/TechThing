@@ -68,7 +68,7 @@
 					<tbody>
 						<tr th:each="product: ${products}">
 							<td th:text="${product.product_id}"></td>
-							<td th:text="${product.typeofproduct_id}"></td>
+							<td th:text="${product.typeofproducts.typeofproduct_name}"></td>
 							<td class="product-name tooltip" th:text="${product.product_name}">
                                 <span class="tooltiptext" th:text="${product.product_name}"></span>
                             </td>

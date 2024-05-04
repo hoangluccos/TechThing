@@ -44,21 +44,22 @@
 					<h2 class="title">Sign up</h2>
 					<div class="input-field">
 						<i class="fas fa-user"></i>
-						<input type="text" placeholder="Username" name="username" th:field ="*{username}" />
+						<input type="text" placeholder="Username" name="username" th:field ="*{username}" id="username"  />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-user"></i>
-						<input type="text" placeholder="FullName" name="fullname" th:field ="*{fullname}" />
+						<input type="text" placeholder="FullName" name="fullname" th:field ="*{fullname}" id="fullName"/>
 					</div>
 					<div class="input-field">
 						<i class="fas fa-envelope"></i>
-						<input type="email" placeholder="Email" name="mail"	th:field ="*{mail}" />
+						<input type="email" placeholder="Email" name="mail"	th:field ="*{mail}" id="mail" />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-lock"></i>
-						<input type="password" placeholder="Password" name="password" th:field ="*{password}" />
+						<input type="password" placeholder="Password" name="password" th:field ="*{password}" id="password" />
 					</div>
 					<input type="submit" class="btn" value="Sign up" />
+
 					<p class="social-text">Or Sign up with social platforms</p>
 					<div class="social-media">
 						<a href="#" class="social-icon">

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
+
+<head>
+    <title>Cart Page</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/css/user/index.css}" />
+</head>
+
+<body>
+<div class="body content" layout:fragment="body">
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product_Name</th>
+            <!-- <th>Price</th> -->
+            <th>Quantity</th>
+            <th>Total_Cost</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart :${carts}">
+            <td><img src="#" alt="Hinh anh san pham" /></td>
+            <td th:text="${cart.product.product_name}"></td>
+            <td>
+                <div class="quantity-control">
+                    <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity - 1})}">
+                        -
+                    </a>
+                    <span th:text="${cart.quantity}"></span>
+                    <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity + 1})}">
+                        +
+                    </a>
+                </div>
+            </td>
+            <td th:text="${cart.quantity}"></td>
+            <td th:text="${cart.amountMoney}"></td>
+            <td>
+
+                <a class="btn-delete" th:href="@{/cart/delete/{productId}(productId=${cart.product.product_id})}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>

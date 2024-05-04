@@ -25,6 +25,7 @@ public interface UserService {
 	long count();
 
 	List<User> findAllById(List<String> ids);
+	User findByUsername(String username);
 
 	List<User> findAll();
 
@@ -39,5 +40,6 @@ public interface UserService {
 	boolean checkLogin (String username, String password);
 
 	boolean authorization(String username, String password);
-		
+
+	void registerDefaultUser(User user);
 }

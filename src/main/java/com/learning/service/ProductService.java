@@ -30,4 +30,6 @@ public interface ProductService {
 	List<Product> saveAll(List<Product> entities);
 
 	Product save(Product entity);
+
+	List<Product> findProductsByType(Integer id);
 }

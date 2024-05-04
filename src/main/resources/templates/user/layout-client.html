@@ -16,11 +16,11 @@
       <div class="header">
         <img th:src="@{'../../img/logo.png'}" alt="Logo" />
         <div class="btn search">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search"> </i>
         </div>
         <div class="action">
           <div class="btn action-btn">
-            <i class="fas fa-shopping-cart"></i>
+            <a href="/cart"><i class="fas fa-shopping-cart"> </i></a>
           </div>
           <div class="btn action-btn">
           	<a href="/user/user_info/{id}">
@@ -32,14 +32,14 @@
 
       <div class="nav">
         <ul>
-          <li class="btn"><i class="fas fa-home"></i> Home</li>
-          <li class="btn"><i class="fas fa-laptop"></i> Laptop</li>
-          <li class="btn"><i class="fas fa-mobile"></i> Phone</li>
-          <li class="btn"><i class="fas fa-tablet"></i> Tablet</li>
+          <li class="btn"><i class="fas fa-home"></i> <a href="/user/home">Home</a></li>
+          <li class="btn"><i class="fas fa-laptop"></i> <a href="/user/category/laptop">Laptop</a></li>
+          <li class="btn"><i class="fas fa-mobile"></i> <a href="/user/category/phone">Phone</a></li>
+          <li class="btn"><i class="fas fa-tablet"></i> <a href="/user/category/tablet">Tablet</a></li>
           <li class="btn">
-            <img th:src="@{'../../img/watch.png'}" alt="watch" /> Watch
+            <img th:src="@{'../../img/watch.png'}" alt="watch" /> <a href="/user/category/watch">Watch</a>
           </li>
-          <li class="btn"><i class="fas fa-desktop"></i> Screen</li>
+          <li class="btn"><i class="fas fa-desktop"></i> <a href="/user/category/pc"> PC</a> </li>
         </ul>
       </div>
       <div class="banner"></div>

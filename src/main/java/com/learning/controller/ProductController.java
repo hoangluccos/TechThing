@@ -59,4 +59,15 @@ public class ProductController {
 		productService.deleteById(id);
 		return "redirect:/admin/product";
 	}
+	@GetMapping("/product/{id}")
+	public String getProductDetails(@PathVariable("id") Integer id, Model model) {
+		Optional<Product> optionalProduct = productService.findById(id);
+		if (optionalProduct.isPresent()) {
+			Product product = optionalProduct.get();
+			model.addAttribute("product", product);
+			return "user/product/product-details";
+		} else {
+			return "error/404";
+		}
+	}
 }

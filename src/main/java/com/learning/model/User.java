@@ -1,94 +1,43 @@
 package com.learning.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
 @Table(name = "users")
 public class User implements Serializable {
-	@Id  
-	private String username;
+    @Id
+    private String username;
 
-	@ManyToOne
-	@JoinColumn(name = "role_id", nullable = false )
-	@JsonManagedReference
-	private Role role;
-	
-	private String password;
-	
-	private String fullname;
-	
-	private String mail;
-	
-	
+    private String password;
 
-	public String getUsername() {
-		return username;
-	}
+    private String fullname;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
+    private String mail;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//    private Set<UserRole> userRoles;
 
-	public String getFullname() {
-		return fullname;
-	}
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
+    public User() {
+        super();
+    }
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public User(String username, Integer role_id, String password, String fullname, String mail, Role role) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.fullname = fullname;
-		this.mail = mail;
-		this.role = role;
-	}
-
-	public User() {
-		super();
-	}
-
-	
-	
-	
 }
