@@ -74,62 +74,62 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true))
-                .oauth2Login(
-                        oauth -> oauth
-                                .loginPage("/login")
-                                .successHandler(new AuthenticationSuccessHandler() {
-
-                                    @Override
-                                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                                        Authentication authentication) throws IOException, ServletException {
-                                        //CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
-                                        OAuth2User oauthUser = (OAuth2User) authentication.getPrincipal();
-
-                                        //check va tao tai khoan cho user khi dang nhap with google
-                                        String email = oauthUser.getAttribute("email");
-                                        userService.processOAuthPostLogin(email);
-
-                                        //Get cac quyen
-                                        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-                                        System.out.println("Authorities: " + authorities);
-
-                                        // Tạo một danh sách mới để lưu các quyền
-                                        List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
-
-                                        // Thêm quyền USER vào trong danh sách mới
-                                        updatedAuthorities.add(new SimpleGrantedAuthority("USER"));
-
-                                        // Sao chép các quyền còn lại vào danh sách mới, loại bỏ giá trị "USER" nếu đã tồn tại
-                                        for (GrantedAuthority authority : authorities) {
-                                            if (!authority.getAuthority().equals("USER")) {
-                                                updatedAuthorities.add(authority);
-                                            }
-                                        }
-
-                                        // Cập nhật authorities thành danh sách mới đã thêm quyền USER
-                                        authorities = updatedAuthorities;
-
-                                        System.out.println("Authorities: " + authorities);
-                                        System.out.println("da phan quyen user1");
-
-                                        //check quyen va redirect
-                                        if (authorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
-                                            response.sendRedirect("/admin");
-                                        } else if (authorities.contains(new SimpleGrantedAuthority("USER"))) {
-                                            System.out.println("da phan quyen user2");
-                                            response.sendRedirect("/user/home");
-                                        }
-                                        else {
-                                            System.out.println("khong phan quyen dc");
-                                        }
-                                    }
-                                }
-
-
-                                )
-                                .userInfoEndpoint(userInfoEndpoint  -> userInfoEndpoint.userService(oauthUserService))
-
-                )
+//                .oauth2Login(
+//                        oauth -> oauth
+//                                .loginPage("/login")
+//                                .successHandler(new AuthenticationSuccessHandler() {
+//
+//                                    @Override
+//                                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+//                                                                        Authentication authentication) throws IOException, ServletException {
+//                                        //CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+//                                        OAuth2User oauthUser = (OAuth2User) authentication.getPrincipal();
+//
+//                                        //check va tao tai khoan cho user khi dang nhap with google
+//                                        String email = oauthUser.getAttribute("email");
+//                                        userService.processOAuthPostLogin(email);
+//
+//                                        //Get cac quyen
+//                                        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+//                                        System.out.println("Authorities: " + authorities);
+//
+//                                        // Tạo một danh sách mới để lưu các quyền
+//                                        List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
+//
+//                                        // Thêm quyền USER vào trong danh sách mới
+//                                        updatedAuthorities.add(new SimpleGrantedAuthority("USER"));
+//
+//                                        // Sao chép các quyền còn lại vào danh sách mới, loại bỏ giá trị "USER" nếu đã tồn tại
+//                                        for (GrantedAuthority authority : authorities) {
+//                                            if (!authority.getAuthority().equals("USER")) {
+//                                                updatedAuthorities.add(authority);
+//                                            }
+//                                        }
+//
+//                                        // Cập nhật authorities thành danh sách mới đã thêm quyền USER
+//                                        authorities = updatedAuthorities;
+//
+//                                        System.out.println("Authorities: " + authorities);
+//                                        System.out.println("da phan quyen user1");
+//
+//                                        //check quyen va redirect
+//                                        if (authorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
+//                                            response.sendRedirect("/admin");
+//                                        } else if (authorities.contains(new SimpleGrantedAuthority("USER"))) {
+//                                            System.out.println("da phan quyen user2");
+//                                            response.sendRedirect("/user/home");
+//                                        }
+//                                        else {
+//                                            System.out.println("khong phan quyen dc");
+//                                        }
+//                                    }
+//                                }
+//
+//
+//                                )
+//                                .userInfoEndpoint(userInfoEndpoint  -> userInfoEndpoint.userService(oauthUserService))
+//
+//                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .userDetailsService(customUserDetailsService);
         return httpSecurity.build();
