@@ -40,4 +40,17 @@ public class User implements Serializable {
         this.roles.add(role);
     }
 
+
+    //oauth2 login with google
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
+//    public Provider getProvider() {
+//        return provider;
+//    }
+//
+//    public void setProvider(Provider provider) {
+//        this.provider = provider;
+//    }
+
 }

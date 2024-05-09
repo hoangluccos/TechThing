@@ -12,27 +12,30 @@
     <title>User Infomation</title>
   </head>
 	<body>
+	<div class="body content" layout:fragment="body">
 		<h1>User Infomation</h1>
-	<table>
-		<thead>
+		<table>
+			<thead>
 			<tr>
 				<th>UserName</th>
 				<th>FullName</th>
 				<th>Password</th>
 				<th>Email</th>
 			</tr>
-		</thead>
-		<tbody>
+			</thead>
+			<tbody>
 			<tr th:each="user: ${users}">
 				<td th:text="${user.username}"></td>
 				<td th:text="${user.fullname}"></td>
-				<td th:text="${user.password}"></td>
+				<!--				<td th:text="${user.password}"></td>-->
 				<td th:text="${user.mail}"></td>
 				<!-- <td style="display: flex; gap: 5px;"><a
 					th:href="@{/user/user_info/edit/{id}(id=${user.username})}"
 					class="btn btn-primary btn-sm">Update</a> -->
 			</tr>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
+
 </body>
 </html>

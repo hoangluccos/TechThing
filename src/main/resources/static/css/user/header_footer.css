@@ -45,6 +45,19 @@ a {
   width: 300px;
   flex: 2;
 }
+.header .searching{
+  flex: 2;
+}
+.btn.search input[type="text"] {
+  width: 100%; /* Thiết lập chiều rộng của input bằng 100% của khối div */
+  box-sizing: border-box; /* Đảm bảo chiều rộng bao gồm cả padding và border */
+  border: none; /* Ẩn border */
+  font-size: 24px;
+  outline: none; /* Ẩn đường viền khi focus */
+}
+.header input:focus {
+  border: none; /* Ẩn border khi focus */
+}
 .header .action {
   margin-left: auto;
   display: flex;
@@ -54,8 +67,8 @@ a {
 .header .search {
   display: flex;
   flex: 1;
-  justify-content: right;
-  align-items: center;
+  justify-content: left;
+  align-items: flex-start;
 }
 .header .action-btn {
   display: flex;

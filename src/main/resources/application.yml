@@ -1,0 +1,27 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  datasource:
+    password: 123#$%456
+    url: jdbc:mysql://localhost:3306/techthing
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    show-sql: true
+  security:
+    oauth2:
+      client: 
+        registration:
+         google:
+            clientId: 876188972361-se5ecjs9gqri8g1kj9v6ca6jsbq93728.apps.googleusercontent.com
+            clientSecret: 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
+         scope:
+          - email
+          - profile

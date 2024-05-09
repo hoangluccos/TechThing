@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.learning.model.Product;
 import com.learning.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 	
@@ -33,9 +38,6 @@ public class ProductServiceImpl implements ProductService {
 	public Optional<Product> findById(Integer id) {
 		return productRepository.findById(id);
 	}
-
-
-
 
 	@Override
 	public boolean existsById(Integer id) {
@@ -82,5 +84,31 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.deleteAll();
 	}
 
+	@Override
+	public Page<Product> listAll(int pageNum, String sortField, String sortDir, String keyword) {
+		int pageSize = 8;
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
+				sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
 
+
+		if(keyword != null )
+		{
+			return productRepository.findAll(keyword, pageable); // the findAll we already custom
+		}
+		return productRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Product> listAllByCategory(int pageNum, String sortField, String sortDir, String keyword) {
+		int pageSize = 8;
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
+				sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+
+
+		if(keyword != null )
+		{
+			return productRepository.findAllByCategory(keyword, pageable); // the findAll we already custom
+		}
+		return productRepository.findAll(pageable);
+	}
 }

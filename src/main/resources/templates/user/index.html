@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
 
 <head>
-	<title>Page 1 Title</title>
+	<title>Home User</title>
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 	<link rel="stylesheet" th:href="@{/css/user/index.css}" />
@@ -10,8 +10,27 @@
 
 <body>
 	<div class="body content" layout:fragment="body">
+
+<!--		<div>-->
+
+<!--			<form th:action="@{/page/1}">-->
+<!--				&lt;!&ndash;cach duoi la cach khong dung thymeleaf				&ndash;&gt;-->
+<!--				&lt;!&ndash;<form action="/" method="post">						&ndash;&gt;-->
+<!--				<input type="hidden" name="sortField" th:value="${sortField}" />-->
+<!--				<input type="hidden" name="sortDir" th:value="${sortDir}" />-->
+
+<!--				Filter:-->
+<!--				<input type="text" name="keyword" th:value="${keyword}" required />-->
+<!--				&nbsp;-->
+<!--				<input type="submit" value="Search" />-->
+<!--				&nbsp;-->
+<!--				<input type="button" value="Clear" onclick="clearFilter()" />-->
+<!--			</form>-->
+
+<!--		</div>-->
+
 		<div class="list-item">
-		<div th:each="product :${products}" class="item">
+		<div th:each="product : ${listProducts}" class="item">
 			<a th:href="@{/product/{id}(id=${product.product_id})}" class="product-link">
 			<img src="https://laptoptld.com/wp-content/uploads/2022/05/Laptop-Acer-Aspire-5-COREI3-2.jpg"
 				alt="Laptop-Acer-Aspire-5-COREI3-2" />
@@ -21,8 +40,42 @@
 			</a>
 			<a class="btn-addcart" th:href="@{/cart/add/{productId}(productId=${product.product_id})}"><i class="fas fa-cart-plus"></i> Add to Cart</a>
 		</div>
-	</div>
-	</div>
+		</div>
+		<!-- phan trang pagination -->
+		<div class="center">
+		<div class="pagination ">
+			<p>Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]</p>
+			&nbsp;
+			<!-- th:if dung de xem co-->
+
+			<a th:if="${currentPage > 1}" th:href="@{'/page/1'+ '?sortField=id&sortDir=asc' + ${keyword != null ?  '&keyword=' + keyword :
+					  ''}}">First</a>
+			<a th:unless="${currentPage > 1}">First</a>
+
+			<a th:if="${currentPage > 1}"
+			   th:href="@{'/page/' + ${currentPage - 1}+ '?sortField=id&sortDir=asc' + ${keyword != null ?  '&keyword=' + keyword :
+					  ''}}">Previous</a>
+			<a th:unless="${currentPage > 1}">Previous</a>
+
+			<span th:each="i : ${#numbers.sequence(1,totalPages)}">
+
+			<a th:if="${i != currentPage}" th:href="@{'/page/' + ${i}+ '?sortField=id&sortDir=asc' + ${keyword != null ?  '&keyword=' + keyword :
+					  ''}}">[[${i}]]</a>
+			<a th:unless="${i != currentPage}">[[${i}]]</a>
+
+			</span>
+
+			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}
+					+ '?sortField=id&sortDir=asc' + ${keyword != null ?  '&keyword=' + keyword :
+					  ''}}">Next</a>
+			<a th:unless="${currentPage < totalPages }">Next</a>
+
+			<a th:if="${currentPage < totalPages}"
+			   th:href="@{'/page/' + ${totalPages}+'?sortField=id&sortDir=asc' + ${keyword != null ?  '&keyword=' + keyword :
+					  ''}}">Last</a>
+			<a th:unless="${currentPage < totalPages}">Last</a>
+		</div>
+		</div>
 	</div>
 </body>
 

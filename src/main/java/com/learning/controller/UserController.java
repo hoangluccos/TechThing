@@ -1,6 +1,8 @@
 package com.learning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,57 +34,143 @@ public class UserController {
 	@Autowired
     private ProductService productService;
 
-	//user home
+	//---- user home
 	@GetMapping("/user/home")
 	public String userHome(Model model, HttpSession session)
 	{
-//		String x = (String) httpSession.getAttribute("username");
-//		System.out.println("session = " + x);
+//		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+//		System.out.println(userDetails.getUsername());
+//		model.addAttribute("products", productService.findAll());
+//		return "user/index";
+
+
+		//---phan trang - pagination
+		String keyword = "";
+		return viewPage(model, 1, "id", "asc", keyword, session);
+
+	}
+	//---- begin phan trang - pagination
+	@RequestMapping("/page/{pageNum}")
+	public String viewPage(Model model, @PathVariable(name = "pageNum")int pageNum,
+						   @Param("sortField") String sortField,
+						   @Param("sortDir")String sortDir,
+						   @Param("keyword")String keyword, HttpSession session){
 		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
 		System.out.println(userDetails.getUsername());
-		model.addAttribute("products", productService.findAll());
+
+
+		//recieve page from service
+		Page<Product> page =  productService.listAll(pageNum,sortField, sortDir,keyword);
+
+		//get value from page.getContent()
+		List<Product> listProducts = page.getContent();
+
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("keyword", keyword);
+
+
+		//reverse asc : tang dan ; desc giam dan; ascending and descending
+		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
+		model.addAttribute("reverseDir", reverseDir);
+
+		return "user/index";
+	}
+
+	//end - pagination
+
+	//---- category laptop
+	@GetMapping("/user/category/laptop/{pageNum}")
+	public String category_laptop(Model model, @PathVariable(name = "pageNum")int pageNum,
+								  @Param("keyword")String keyword)
+	{
+//		String sortDir = "asc";
+//		String sortField = "id";
+//		String id = "1";
+//		//recieve page from service
+//		Page<Product> page =  productService.listAllByCategory(pageNum,sortField, sortDir,id);
+//
+//		//get value from page.getContent()
+//		List<Product> listProducts = page.getContent();
+//
+//
+//		model.addAttribute("currentPage", pageNum);
+//		model.addAttribute("totalPages", page.getTotalPages());
+//		model.addAttribute("totalItems", page.getTotalElements());
+//		model.addAttribute("listProducts", listProducts);
+//		model.addAttribute("sortField", sortField);
+//		model.addAttribute("sortDir", sortDir);
+//		model.addAttribute("keyword", keyword);
+//
+//
+//		//reverse asc : tang dan ; desc giam dan; ascending and descending
+//		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
+//		model.addAttribute("reverseDir", reverseDir);
+//
+//		return "user/index";
+		return category(model, pageNum, keyword, "1");
+	}
+
+	public String category (Model model, @PathVariable(name = "pageNum")int pageNum,
+							@Param("keyword")String keyword, String id){
+		String sortDir = "asc";
+		String sortField = "id";
+//		String id = "1";
+		//recieve page from service
+		Page<Product> page =  productService.listAllByCategory(pageNum,sortField, sortDir,id);
+
+		//get value from page.getContent()
+		List<Product> listProducts = page.getContent();
+
+
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("keyword", keyword);
+
+
+		//reverse asc : tang dan ; desc giam dan; ascending and descending
+		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
+		model.addAttribute("reverseDir", reverseDir);
+
 		return "user/index";
 
-	}
-	//category laptop
-	@GetMapping("/user/category/laptop")
-	public String category_laptop(Model model)
-	{
-		Integer id = 1;
-		model.addAttribute("products", productService.findProductsByType(id));
-		return "user/index";
 
 	}
-	@GetMapping("/user/category/phone")
-	public String category_phone(Model model)
+	@GetMapping("/user/category/phone/{pageNum}")
+	public String category_phone(Model model, @PathVariable(name = "pageNum")int pageNum,
+								 @Param("keyword")String keyword)
 	{
-		Integer id = 2;
-		model.addAttribute("products", productService.findProductsByType(id));
-		return "user/index";
+		return category(model, pageNum, keyword, "2");
 
 	}
-	@GetMapping("/user/category/tablet")
-	public String category_tablet(Model model)
+	@GetMapping("/user/category/tablet/{pageNum}")
+	public String category_tablet(Model model, @PathVariable(name = "pageNum")int pageNum,
+								  @Param("keyword")String keyword)
 	{
-		Integer id = 3;
-		model.addAttribute("products", productService.findProductsByType(id));
-		return "user/index";
+		return category(model, pageNum, keyword, "3");
 
 	}
-	@GetMapping("/user/category/watch")
-	public String category_watch(Model model)
+	@GetMapping("/user/category/watch/{pageNum}")
+	public String category_watch(Model model, @PathVariable(name = "pageNum")int pageNum,
+								 @Param("keyword")String keyword)
 	{
-		Integer id = 4;
-		model.addAttribute("products", productService.findProductsByType(id));
-		return "user/index";
+		return category(model, pageNum, keyword, "4");
 
 	}
-	@GetMapping("/user/category/pc")
-	public String category_pc(Model model)
+	@GetMapping("/user/category/pc/{pageNum}")
+	public String category_pc(Model model, @PathVariable(name = "pageNum")int pageNum,
+							  @Param("keyword")String keyword)
 	{
-		Integer id = 5;
-		model.addAttribute("products", productService.findProductsByType(id));
-		return "user/index";
+		return category(model, pageNum, keyword, "5");
 
 	}
 
@@ -129,10 +217,12 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/user/user_info/{id}")
-	public String userInfo(@PathVariable String id, Model model)
+	@GetMapping("/user/user_info")
+	public String userInfo( Model model , HttpSession session)
 	{
-		model.addAttribute("users", userService.findById(id));
+		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+		String id = userDetails.getUsername();
+		model.addAttribute("users", userService.findByUsername(id));
 		return "user/user_info";
 	}
 	
