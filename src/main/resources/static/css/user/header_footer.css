@@ -94,8 +94,11 @@ a {
   width: 140px;
 }
 .nav img {
-  height: 100%;
+  height: 18px;
 }
+
+
+/*--------------------banner--------------------*/
 .banner {
   height: 50vh;
   /* width: 100%; */
