@@ -2,6 +2,7 @@ package com.learning.service;
 
 import com.learning.model.Invoices;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface InvoicesService {
@@ -12,5 +13,6 @@ public interface InvoicesService {
     public void deleteAllById(Iterable<? extends Integer> integers);
     public void deleteAll(Iterable<? extends Invoices> entities);
     public void deleteAll();
-    public Invoices findByName(String username);
+    public List<Invoices> findByName(String name);
+    public List<Invoices> findAll ();
 }

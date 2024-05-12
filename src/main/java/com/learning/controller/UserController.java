@@ -219,10 +219,13 @@ public class UserController {
 		String name = userDetails.getUsername();
 
 		//lsu don hang
-		Invoices dh = invoicesService.findByName(name);
+		List<Invoices> dh = invoicesService.findByName(name);
 		List<InvoiceDetail> detaildh = new ArrayList<>();
 		if (dh != null) {
-			detaildh = invoicesDetailService.findByInvoiceID(dh.getInvoice_id());
+			for (Invoices invoice : dh) {
+				List<InvoiceDetail> details = invoicesDetailService.findByInvoiceID(invoice.getInvoice_id());
+				detaildh.addAll(details);
+			}
 		}
 		else{
 			detaildh = new  ArrayList<>();
@@ -233,5 +236,17 @@ public class UserController {
 		model.addAttribute("lsdh", detaildh);
 		return "user/user_info";
 	}
-	
+	@GetMapping("/user/user_info/edit")
+	public String editProfile(Model model, HttpSession session){
+		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+
+
+		model.addAttribute("user", userService.findByUsername(userDetails.getUsername()));
+		return "user/edit";
+	}
+	@PostMapping("/user/save")
+	public String saveUser(@ModelAttribute ("user") User user ){
+		userService.save(user);
+		return "redirect:/user/user_info";
+	}
 }

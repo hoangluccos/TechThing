@@ -50,16 +50,18 @@ public class CartController {
     }
     @GetMapping("/cart/delete/{productId}")
     public String deleteProductInCart(@PathVariable Integer productId, HttpSession session) {
-        String username = (String) session.getAttribute("username");
+        UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+        String username = (String)userDetails.getUsername();
         cartService.deleteCartByProductIdByUserName(productId, username);
         return "redirect:/cart";
     }
     @GetMapping("/cart/update/{productId}/{amount}")
-    public String updateProductInCart(@PathVariable Integer productId,@PathVariable Integer amount,HttpServletRequest request) {
-        String username = (String) request.getSession().getAttribute("username");
+    public String updateProductInCart(@PathVariable Integer productId,@PathVariable Integer amount,HttpSession session) {
+        UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+        String username = (String)userDetails.getUsername();
         cartService.updateCart(productId, username, amount);
         return "redirect:/cart";
-    } 
+    }
     @GetMapping("/cart/add/{productId}")
     public String addToCart(@PathVariable(name = "productId")Integer productId,HttpSession session) {
         UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");

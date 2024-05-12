@@ -16,4 +16,5 @@ public interface InvoicesDetailService {
     public void deleteAll(Iterable<? extends InvoiceDetail> entities);
     public void deleteAll();
     public List<InvoiceDetail> findByInvoiceID(Integer id);
+    public List<InvoiceDetail> findAll ();
 }

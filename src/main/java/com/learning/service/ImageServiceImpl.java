@@ -36,4 +36,5 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> getImagesByProductId(Integer productId) {
         return imageRepository.findImagesByProductId(productId);
     }
+
 }

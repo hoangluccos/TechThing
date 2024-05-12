@@ -20,6 +20,7 @@
 }
 .item img {
   width: 60%;
+  min-height: 180px;
 }
 .item .saleoff {
   color: red;

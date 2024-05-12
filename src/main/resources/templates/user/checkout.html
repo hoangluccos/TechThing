@@ -42,15 +42,15 @@
                 <br>
                 <table class="table-cart-checkout mytable">
                     <tr>
-                        <th>Ảnh</th>
+<!--                        <th>Ảnh</th>-->
                         <th>Tên sản phẩm</th>
                         <th>Đơn giá</th>
                         <th>Tổng</th>
                     </tr>
                     <tr th:each="sanpham : ${cart}" style="text-align: center;">
-                        <td>
-                            <img th:src="@{'#'}" alt="img" class="img-reponsive fix-size-img">
-                        </td>
+<!--                        <td>-->
+<!--                            <img th:src="@{'#'}" alt="img" class="img-reponsive fix-size-img">-->
+<!--                        </td>-->
                         <td style="color:green" th:text="${sanpham.product_name}"></td>
                         <td class="donGia">
                             <div class="check " style="display: inline-block;" th:text="${sanpham.price}"></div>

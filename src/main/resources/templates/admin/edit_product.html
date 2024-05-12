@@ -75,18 +75,26 @@
 					<h1 class="text-center">Update Product</h1>
 					<form th:action="@{/admin/product/save_edit}" th:object="${product}" method="POST">
 						<table class="table">
-							<tr>
-								<td><label>Product ID</label></td>
-								<td><input id="product_id" type="number" name="product_id" th:field="*{product_id}" class="form-control" placeholder="Enter Product ID" /></td>
-							</tr>
-							<tr>
-								<td><label>Safeoff</label></td>
-								<td><input id="saleoff_id" type="number" name="saleoff_id" th:field="*{saleoff_id}" class="form-control" placeholder="Enter Safeoff ID" /></td>
-							</tr>
-							<tr>
-								<td><label>Type</label></td>
-								<td><input id="typeofproduct_id" type="number" name="typeofproduct_id" th:field="*{typeofproducts.typeofproduct_id}" class="form-control" placeholder="Enter TypeofProduct ID" /></td>
-							</tr>
+<!--							<tr>-->
+<!--								<td><label>Product ID</label></td>-->
+<!--								<td><input id="product_id" type="number" name="product_id" th:field="*{product_id}" class="form-control" placeholder="Enter Product ID" /></td>-->
+<!--							</tr>-->
+							<div class="form-group">
+								<label>Safeoff</label>
+								<select th:field="${product.saleoffs}" class="form-control" required>
+									<th:block th:each="saleoff: ${listsaleoffs}">
+										<option th:text="${saleoff.saleoff_percent} + '%'" th:value="${saleoff.saleoff_id}"/>
+									</th:block>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Type</label>
+								<select th:field="${product.typeofproducts}" class="form-control" required>
+									<th:block th:each="category: ${listcategories}">
+										<option th:text="${category.typeofproduct_name}" th:value="${category.typeofproduct_id}"/>
+									</th:block>
+								</select>
+							</div>
 							<tr>
 								<td><label>Name</label></td>
 								<td><input id="product_name" type="text" name="product_name" th:field="*{product_name}" class="form-control" placeholder="Enter Product Name" /></td>

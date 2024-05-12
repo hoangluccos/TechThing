@@ -54,7 +54,7 @@ public class CheckoutController {
     @PostMapping(value="/thankyou")
     public String thankyouPage(Model model, HttpSession session, @Param("address")String address,
                                @Param("receiver") String receiver, @Param("phone")String phone
-                               ){
+    ){
         UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
         User ngmua = userService.findByUsername(userDetails.getUsername());
         //save invoice

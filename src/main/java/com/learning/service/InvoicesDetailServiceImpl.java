@@ -56,4 +56,9 @@ public class InvoicesDetailServiceImpl implements InvoicesDetailService{
     public List<InvoiceDetail> findByInvoiceID(Integer id){
         return repo.findByInvoiceID(id);
     }
+
+    @Override
+    public List<InvoiceDetail> findAll (){
+        return repo.findAll();
+    }
 }

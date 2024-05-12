@@ -5,6 +5,7 @@ import com.learning.repository.InvoicesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,13 @@ public class InvoicesServiceImpl implements InvoicesService {
     }
 
     @Override
-    public Invoices findByName(String name){
+    public List<Invoices> findByName(String name){
         return invoicesRepository.findByName(name);
     }
+
+    @Override
+    public List<Invoices> findAll (){
+        return invoicesRepository.findAll();
+    }
+
 }
