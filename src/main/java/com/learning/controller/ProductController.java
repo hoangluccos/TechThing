@@ -1,5 +1,6 @@
 package com.learning.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.learning.model.Product;
+import com.learning.model.SaleOff;
+import com.learning.model.TypeOfProducts;
+import com.learning.service.CategoryService;
 import com.learning.service.ProductService;
+import com.learning.service.SaleOffService;
 
 
 @Controller
@@ -20,30 +25,43 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	SaleOffService saleOffService;
 	//handle method to handle list product and return model and view
-	@GetMapping("/admin/product")
-	public String listProducts(Model model) {
-		model.addAttribute("products", productService.findAll());
-		return "admin/product";
-	}
+	/*
+	 * @GetMapping("/admin/product") public String listProducts(Model model) {
+	 * model.addAttribute("products", productService.findAll()); return
+	 * "admin/product"; }
+	 */
 	
 	@GetMapping("/admin/product/new")
 	public String createProduct(Model model) {
 		//Create product object to hold product from data
 		Product product = new Product();
+		List<TypeOfProducts> category = categoryService.findAll();
+		List<SaleOff> saleoff = saleOffService.findAll();
 		model.addAttribute("product", product);
+		model.addAttribute("listcategories", category);
+		model.addAttribute("listsaleoffs", saleoff);
 		return "admin/create_product";
 	}
 
 	@PostMapping("/admin/product/save_new")
 	public String saveProduct(@ModelAttribute("product") Product entity) {
 		productService.save(entity);
-		return "redirect:/admin/product";
+		return "redirect:/admin/category";
 	}
 	
 	@GetMapping("/admin/product/edit/{id}")
 	public String editStudent(@PathVariable Integer id, Model model) {
+		List<TypeOfProducts> category = categoryService.findAll();
+		List<SaleOff> saleoff = saleOffService.findAll();
 		model.addAttribute("product", productService.findById(id));
+		model.addAttribute("listcategories", category);
+		model.addAttribute("listsaleoffs", saleoff);
 		return "admin/edit_product";
 	}
 	
@@ -51,13 +69,13 @@ public class ProductController {
 	public String updateStudent(
 			@ModelAttribute("product") Product product) {
 	        productService.save(product); // Lưu thông tin sản phẩm đã cập nhật
-	        return "redirect:/admin/product"; // Chuyển hướng về trang danh sách sản phẩm	
+	        return "redirect:/admin/category"; // Chuyển hướng về trang danh sách sản phẩm	
 	}
 	
 	@GetMapping("/admin/product/delete/{id}")
 	public String deleteProduct(@PathVariable int id) {
 		productService.deleteById(id);
-		return "redirect:/admin/product";
+		return "redirect:/admin/category";
 	}
 	@GetMapping("/product/{id}")
 	public String getProductDetails(@PathVariable("id") Integer id, Model model) {

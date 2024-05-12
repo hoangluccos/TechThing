@@ -64,7 +64,7 @@ public class UserController {
 
 		//get value from page.getContent()
 		List<Product> listProducts = page.getContent();
-
+		
 
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", page.getTotalPages());

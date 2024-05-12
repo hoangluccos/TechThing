@@ -6,48 +6,82 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" th:href="@{/css/user/index.css}" />
+    <style>
+        /* Custom styles */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .cart-table th,
+        .cart-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .cart-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control a {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f9f9f9;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .quantity-control a:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
 </head>
 
 <body>
-<div class="body content" layout:fragment="body">
-    <table class="cart-table">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product_Name</th>
-            <!-- <th>Price</th> -->
-            <th>Quantity</th>
-            <th>Total_Cost</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cart :${carts}">
-            <td><img src="#" alt="Hinh anh san pham" /></td>
-            <td th:text="${cart.product.product_name}"></td>
-            <td>
-                <div class="quantity-control">
-                    <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity - 1})}">
-                        -
-                    </a>
-                    <span th:text="${cart.quantity}"></span>
-                    <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity + 1})}">
-                        +
-                    </a>
-                </div>
-            </td>
-            <td th:text="${cart.quantity}"></td>
-            <td th:text="${cart.amountMoney}"></td>
-            <td>
-
-                <a class="btn-delete" th:href="@{/cart/delete/{productId}(productId=${cart.product.product_id})}">
-                    Delete
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="body content" layout:fragment="body">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Amount Money</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cart :${carts}">
+                    <td><img src="#" alt="Hinh anh san pham" /></td>
+                    <td th:text="${cart.product.product_name}"></td>
+                    <td>
+                        <div class="quantity-control">
+                            <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity - 1})}">
+                                -
+                            </a>
+                            <span th:text="${cart.quantity}"></span>
+                            <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity + 1})}">
+                                +
+                            </a>
+                        </div>
+                    </td>
+                    <td th:text="${cart.amountMoney}"></td>
+                    <td>
+                        <a class="btn-delete" th:href="@{/cart/delete/{productId}(productId=${cart.product.product_id})}">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

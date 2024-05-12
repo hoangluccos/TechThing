@@ -12,36 +12,22 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 					<div class="card-body">
 					<h1 class="text-center">Create New Product</h1>
-						<form th:action="@{/admin/product/save_new}" th:object=" ${product}" method="POST"><!-- de y dong nay -->
-							<!-- <div class="form-group">
-								<label>Product ID</label>
-								<input
-									type="number"
-									name="product_id"
-									th:field="${product.product_id}"
-									class = "form-controll"
-									placeholder="Enter Product ID"
-									/>
-							</div> -->
+						<form th:action="@{/admin/product/save_new}" th:object=" ${product}" method="POST">
  							<div class="form-group">
 								<label>Safeoff</label>
-								<input
-									type="number"
-									name="saleoff_id"
-									th:field="${product.saleoff_id}"
-									class = "form-controll"
-									placeholder="Enter Safeoff ID"
-									/>
+								<select th:field="${product.saleoffs}" class="form-control" required>
+										<th:block th:each="saleoff: ${listsaleoffs}">
+											<option th:text="${saleoff.saleoff_percent} + '%'" th:value="${saleoff.saleoff_id}"/> 
+										</th:block>
+									</select>
 							</div>
 							<div class="form-group">
 								<label>Type</label>
-								<input
-									type="number"
-									name="typeofproduct_id"
-									th:field="${product.typeofproducts.typeofproduct_id}"
-									class = "form-controll"
-									placeholder="Enter TypeofProduct ID"
-									/>
+									<select th:field="${product.typeofproducts}" class="form-control" required>
+										<th:block th:each="category: ${listcategories}">
+											<option th:text="${category.typeofproduct_name}" th:value="${category.typeofproduct_id}"/> 
+										</th:block>
+									</select>
 							</div>
 							<div class="form-group">
 								<label>Name</label>

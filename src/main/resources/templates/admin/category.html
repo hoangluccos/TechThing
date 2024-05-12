@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
+    <title>Category Management</title>
     <style>
     td.product-name {
             white-space: nowrap;
@@ -52,42 +52,36 @@
     <section class="main" layout:fragment="body">
 		<div class="container">
 			<div class="row">
-				<h1>List Product</h1>
+				<h1>List Category</h1>
 				<table>
 					<thead>
 						<tr>
-							<th>Type</th>
 							<th>Name</th>
-							<th>Quantity</th>
-							<th>Price</th>
 							<th>Description</th>
+							<th>Warranty</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="product: ${products}">
-							<td th:text="${product.typeofproducts.typeofproduct_name}"></td>
-							<td class="product-name tooltip" th:text="${product.product_name}">
-                                <span class="tooltiptext" th:text="${product.product_name}"></span>
-                            </td>
-                            <td th:text="${product.quantity}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td th:text="${product.product_desc}"></td>
+						<tr th:each="category: ${category}">
+							<td th:text="${category.typeofproduct_name}"></td>
+                            <td th:text="${category.typeofproduct_desc}"></td>
+                            <td th:text="${category.warranty_period}"></td>
 							<td style="display: flex; gap: 5px;">
 								<a
-								th:href="@{/admin/product/edit/{id}(id=${product.product_id})}"
-								class="btn">Update</a> 
-							<a
+								th:href="@{/admin/category/list/{id}(id=${category.typeofproduct_id})}"
+								class="btn">List</a>
+<!--								<a
 								th:href="@{/admin/product/delete/{id}(id=${product.product_id})}"
-								class="btn">Delete</a>
+								class="btn">Update</a> -->
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="row">
-					<div class="col-lg-3">
+					<!-- <div class="col-lg-3">
 						<a th:href="@{/admin/product/new}" class="btn btn-primary btn-sm mb-3">Add Product</a> 
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

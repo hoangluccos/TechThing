@@ -2,6 +2,7 @@ package com.learning.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +26,9 @@ public class User implements Serializable {
     private String fullname;
 
     private String mail;
-
+    
+    @OneToMany(mappedBy = "user")
+	private List<Cart> carts;
 //    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 //    private Set<UserRole> userRoles;
 

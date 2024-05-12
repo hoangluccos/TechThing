@@ -25,23 +25,19 @@
 							</div>
  							<div class="form-group">
 								<label>Safeoff</label>
-								<input id="saleoff_id"
-									type="number"
-									name="saleoff_id"
-									th:field="*{saleoff_id}"
-									class = "form-controll"
-									placeholder="Enter Safeoff ID"
-									/>
+								<select th:field="${product.saleoffs}" class="form-control" required>
+										<th:block th:each="saleoff: ${listsaleoffs}">
+											<option th:text="${saleoff.saleoff_percent} + '%'" th:value="${saleoff.saleoff_id}"/> 
+										</th:block>
+									</select>
 							</div>
 							<div class="form-group">
 								<label>Type</label>
-								<input id="typeofproduct_id"
-									type="number"
-									name="typeofproduct_id"
-									th:field="*{typeofproducts.typeofproduct_id}"
-									class = "form-controll"
-									placeholder="Enter TypeofProduct ID"
-									/>
+									<select th:field="${product.typeofproducts}" class="form-control" required>
+										<th:block th:each="category: ${listcategories}">
+											<option th:text="${category.typeofproduct_name}" th:value="${category.typeofproduct_id}"/> 
+										</th:block>
+									</select>
 							</div>
 							<div class="form-group">
 								<label>Name</label>

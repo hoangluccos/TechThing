@@ -34,10 +34,10 @@ public class Cart {
     private int quantity;
 
     @Column(name = "price", nullable = false)
-    private double price;
+    private int price;
 
     @Column(name = "amountmoney", nullable = false)
-    private double amountMoney;
+    private int amountMoney;
 
     public CartId getId() {
         return id;
@@ -71,19 +71,19 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getAmountMoney() {
+    public int getAmountMoney() {
         return amountMoney;
     }
 
-    public void setAmountMoney(double amountMoney) {
+    public void setAmountMoney(int amountMoney) {
         this.amountMoney = amountMoney;
     }
 

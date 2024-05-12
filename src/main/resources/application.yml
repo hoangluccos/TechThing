@@ -4,7 +4,7 @@ server:
       enabled: false
 spring:
   datasource:
-    password: 123#$%456
+    password: kieuduyen20112000
     url: jdbc:mysql://localhost:3306/techthing
     username: root
   jpa:
