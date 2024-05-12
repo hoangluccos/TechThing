@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Thanh toán</title>
+</head>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var totalElements = document.querySelectorAll('.total');
+        var orderTotal = 0;
+        totalElements.forEach(function(element) {
+            var totalPrice = parseFloat(element.textContent.trim().replace('VND', '').replace(',', ''));
+            orderTotal += totalPrice;
+        });
+        var tongGiaTriInput = document.getElementById('tongGiaTri');
+        tongGiaTriInput.value = orderTotal; // Gán giá trị orderTotal vào thuộc tính value của input
+        document.getElementById('ordertotal').textContent = orderTotal.toLocaleString('en-US', { style: 'currency', currency: 'VND' });
+    });
+</script>
+<body>
+<div class="container">
+    <form method="POST" action="/thankyou">
+        <div class="row justify-content-center">
+            <br><br>
+            <div class="col-md-3 text-center">
+                <br>
+                <p class="border-p" style="line-height:1.5;"><b>Thông tin nhận hàng</b></p>
+                <p style="line-height:2;">Họ tên người nhận hàng (*)</p>
+                <input size="27" name="receiver" required>
+                <p style="line-height:2;">Số điện thoại (*)</p>
+                <input size="27" name="phone" required>
+                <p style="line-height:2;">Địa chỉ(số nhà, đường, tỉnh thành) (*)</p>
+                <textarea rows="5" cols="29" name="address" required></textarea>
+                <br><br>
+                <input type="hidden" id="tongGiaTri" name="tongGiaTri">
+            </div>
+            <div class="col-md-6 text-center">
+                <br>
+                <p class="border-p" style="line-height:1.5;"><b>Giỏ hàng</b></p>
+                <br>
+                <table class="table-cart-checkout mytable">
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Tổng</th>
+                    </tr>
+                    <tr th:each="sanpham : ${cart}" style="text-align: center;">
+                        <td>
+                            <img th:src="@{'#'}" alt="img" class="img-reponsive fix-size-img">
+                        </td>
+                        <td style="color:green" th:text="${sanpham.product_name}"></td>
+                        <td class="donGia">
+                            <div class="check " style="display: inline-block;" th:text="${sanpham.price}"></div>
+                            <div style="display: inline-block;"> x [[${quantity[sanpham.product_id]}]]</div>
+                        </td>
+                        <td>
+                            <div class="total"  >[[${sanpham.price * quantity.get(sanpham.product_id)}]] VND</div>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <p>Tổng giá trị đơn hàng: <b id="ordertotal"></b></p>
+                <br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="/cart" class="btn btn-primary">Quay lại giỏ hàng</a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <button class="btn btn-danger pull-center" type="submit" id="submit">Gửi đơn hàng</button>
+                <br><br>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,7 +1,9 @@
 package com.learning.controller;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.learning.model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +66,9 @@ public class ProductController {
 		Optional<Product> optionalProduct = productService.findById(id);
 		if (optionalProduct.isPresent()) {
 			Product product = optionalProduct.get();
+			List<Image> images = product.getImages();
 			model.addAttribute("product", product);
+			model.addAttribute("images", images);
 			return "user/product/product-details";
 		} else {
 			return "error/404";

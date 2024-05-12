@@ -17,7 +17,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer>, Pag
     public List<Product> findByType(Integer id);
 
     @Query("SELECT p FROM Product p WHERE "
-            + "CONCAT(p.product_name, p.product_desc )"
+            + "CONCAT(p.product_name)"
             + "LIKE %?1%")
     public Page<Product> findAll(String keyword, Pageable pageable);
 

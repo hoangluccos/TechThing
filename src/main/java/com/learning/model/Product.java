@@ -37,6 +37,11 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	private List<Cart> carts;
 
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Image> images;
+
+
+
 	public Product(Integer product_id, Integer saleoff_id, TypeOfProducts typeofproducts, String product_name, Integer quantity, int price, String product_desc) {
 		this.product_id = product_id;
 		this.saleoff_id = saleoff_id;

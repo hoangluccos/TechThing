@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
-	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-product.html}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+
     />
-    <link rel="stylesheet" 	th:href="@{/css/user/header_footer.css}" />
+	  <link rel="stylesheet" th:href="@{/css/user/user_info.css}" />
     <title>User Infomation</title>
   </head>
 	<body>
 	<div class="body content" layout:fragment="body">
-		<h1>User Infomation</h1>
-		<table>
+		<div class="user-info-container">
+			<span class="larger bold">User Information</span>
+		</div>
+		<table class="user-info-table">
 			<thead>
 			<tr>
-				<th>UserName</th>
-				<th>FullName</th>
-				<th>Password</th>
+				<th>Username</th>
+				<th>Full Name</th>
 				<th>Email</th>
+				<th>Action</th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr th:each="user: ${users}">
 				<td th:text="${user.username}"></td>
 				<td th:text="${user.fullname}"></td>
-				<!--				<td th:text="${user.password}"></td>-->
 				<td th:text="${user.mail}"></td>
-				<!-- <td style="display: flex; gap: 5px;"><a
-					th:href="@{/user/user_info/edit/{id}(id=${user.username})}"
-					class="btn btn-primary btn-sm">Update</a> -->
+				<td><a th:href="@{/user/user_info/edit/{id}(id=${user.username})}" class="btn">Update</a></td>
+			</tr>
+			</tbody>
+		</table>
+		<h1 style="text-align: center; margin-top: 24px;">Lịch sử Đơn Hàng</h1>
+		<table style="margin: 0 auto; width: 50%;">
+			<thead>
+			<tr>
+				<th>Invoice ID</th>
+				<th>Product Name</th>
+				<th>Quantity</th>
+<!--				<th>Time</th>-->
+				<th>Phone</th>
+			</tr>
+			</thead>
+			<tbody th:if="${lsdh != null}">
+			<tr th:each="dh: ${lsdh}">
+				<td th:if="${dh != null}" th:text="${dh.invoice_id != null ? dh.invoice_id.getInvoice_id() : ''}"></td>
+				<td th:if="${dh != null}" th:text="${dh.product != null ? dh.product.product_name : ''}"></td>
+				<td th:if="${dh != null}" th:text="${dh.quantity != null ? dh.quantity : ''}"></td>
+				<td th:if="${dh != null}" th:text="${dh.phone != null ? dh.phone : ''}"></td>
 			</tr>
 			</tbody>
 		</table>

@@ -32,9 +32,7 @@
 		<div class="list-item">
 		<div th:each="product : ${listProducts}" class="item">
 			<a th:href="@{/product/{id}(id=${product.product_id})}" class="product-link">
-			<img src="https://laptoptld.com/wp-content/uploads/2022/05/Laptop-Acer-Aspire-5-COREI3-2.jpg"
-				alt="Laptop-Acer-Aspire-5-COREI3-2" />
-			<p class="saleoff">[[${product.saleoff_id}]] </p>
+				<img th:each="imageSrc, iter : ${imageSrcsByProductId.get(product.product_id)}" th:if="${iter.index == 0}" th:src="${imageSrc}" alt="Product Image" />
 			<h3 class="title">[[${product.product_name}]]</h3>
 			<p class="price">[[${product.price}]] đ</p>
 			</a>

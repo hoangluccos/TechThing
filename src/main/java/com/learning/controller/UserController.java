@@ -1,5 +1,9 @@
 package com.learning.controller;
 
+import com.learning.model.InvoiceDetail;
+import com.learning.model.Invoices;
+import com.learning.service.InvoicesDetailService;
+import com.learning.service.InvoicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -23,8 +27,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
 
 import java.lang.ProcessBuilder.Redirect;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -58,14 +61,20 @@ public class UserController {
 		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
 		System.out.println(userDetails.getUsername());
 
-
 		//recieve page from service
 		Page<Product> page =  productService.listAll(pageNum,sortField, sortDir,keyword);
 
 		//get value from page.getContent()
 		List<Product> listProducts = page.getContent();
 
+		// Get image sources for each product
+		Map<Integer, List<String>> imageSrcsByProductId = new HashMap<>();
+		for (Product product : listProducts) {
+			List<String> imageSrcs = productService.getImageSrcsByProductId(product.getProduct_id());
+			imageSrcsByProductId.put(product.getProduct_id(), imageSrcs);
+		}
 
+		model.addAttribute("imageSrcsByProductId", imageSrcsByProductId);
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
@@ -89,30 +98,6 @@ public class UserController {
 	public String category_laptop(Model model, @PathVariable(name = "pageNum")int pageNum,
 								  @Param("keyword")String keyword)
 	{
-//		String sortDir = "asc";
-//		String sortField = "id";
-//		String id = "1";
-//		//recieve page from service
-//		Page<Product> page =  productService.listAllByCategory(pageNum,sortField, sortDir,id);
-//
-//		//get value from page.getContent()
-//		List<Product> listProducts = page.getContent();
-//
-//
-//		model.addAttribute("currentPage", pageNum);
-//		model.addAttribute("totalPages", page.getTotalPages());
-//		model.addAttribute("totalItems", page.getTotalElements());
-//		model.addAttribute("listProducts", listProducts);
-//		model.addAttribute("sortField", sortField);
-//		model.addAttribute("sortDir", sortDir);
-//		model.addAttribute("keyword", keyword);
-//
-//
-//		//reverse asc : tang dan ; desc giam dan; ascending and descending
-//		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
-//		model.addAttribute("reverseDir", reverseDir);
-//
-//		return "user/index";
 		return category(model, pageNum, keyword, "1");
 	}
 
@@ -126,7 +111,13 @@ public class UserController {
 
 		//get value from page.getContent()
 		List<Product> listProducts = page.getContent();
+		Map<Integer, List<String>> imageSrcsByProductId = new HashMap<>();
+		for (Product product : listProducts) {
+			List<String> imageSrcs = productService.getImageSrcsByProductId(product.getProduct_id());
+			imageSrcsByProductId.put(product.getProduct_id(), imageSrcs);
+		}
 
+		model.addAttribute("imageSrcsByProductId", imageSrcsByProductId);
 
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -216,13 +207,30 @@ public class UserController {
 		return "redirect:/admin/user";
 	}
 	
-	
+	@Autowired
+	InvoicesService invoicesService;
+	@Autowired
+	InvoicesDetailService invoicesDetailService;
 	@GetMapping("/user/user_info")
-	public String userInfo( Model model , HttpSession session)
+	public String userInfo(Model model , HttpSession session)
 	{
+		//user info
 		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
-		String id = userDetails.getUsername();
-		model.addAttribute("users", userService.findByUsername(id));
+		String name = userDetails.getUsername();
+
+		//lsu don hang
+		Invoices dh = invoicesService.findByName(name);
+		List<InvoiceDetail> detaildh = new ArrayList<>();
+		if (dh != null) {
+			detaildh = invoicesDetailService.findByInvoiceID(dh.getInvoice_id());
+		}
+		else{
+			detaildh = new  ArrayList<>();
+		}
+
+		model.addAttribute("users", userService.findByUsername(name));
+
+		model.addAttribute("lsdh", detaildh);
 		return "user/user_info";
 	}
 	

@@ -2,7 +2,10 @@ package com.learning.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.learning.model.Image;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -111,4 +114,13 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productRepository.findAll(pageable);
 	}
+	@Override
+	public List<String> getImageSrcsByProductId(int productId) {
+		Product product = findById((int) productId)
+				.orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + productId));
+		return product.getImages().stream()
+				.map(Image::getImage_src)
+				.collect(Collectors.toList());
+	}
+
 }

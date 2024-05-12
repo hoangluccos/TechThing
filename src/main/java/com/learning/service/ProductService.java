@@ -35,4 +35,5 @@ public interface ProductService {
 	List<Product> findProductsByType(Integer id);
 	Page<Product> listAll(int pageNum, String sortField, String sortDir, String keyword);
 	Page<Product> listAllByCategory(int pageNum, String sortField, String sortDir, String keyword);
+	public List<String> getImageSrcsByProductId(int productId);
 }

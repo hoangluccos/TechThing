@@ -1,52 +1,62 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-product.html}">
 
 <head>
     <title>Cart Page</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" th:href="@{/css/user/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/user/cart.css}" />
 </head>
 
 <body>
 <div class="body content" layout:fragment="body">
+    <span class="larger bold">Shopping Cart</span>
     <table class="cart-table">
         <thead>
         <tr>
+            <th></th>
             <th>Image</th>
-            <th>Product_Name</th>
-            <!-- <th>Price</th> -->
+            <th>Product Name</th>
             <th>Quantity</th>
-            <th>Total_Cost</th>
+            <th>Total Cost</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cart :${carts}">
-            <td><img src="#" alt="Hinh anh san pham" /></td>
+        <tr th:each="cart, stat : ${carts}">
+            <td><input type="checkbox" th:id="|checkbox-${stat.index}|" th:value="${cart.product.product_id}" /></td>
+            <td>
+                <img th:each="imageSrc, iter : ${imageSrcsByProductId.get(cart.product.product_id)}" th:if="${iter.index == 0}" th:src="${imageSrc}" alt="Product Image" class="cart-image" />
+            </td>
             <td th:text="${cart.product.product_name}"></td>
             <td>
                 <div class="quantity-control">
                     <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity - 1})}">
-                        -
+                        <i class="fas fa-minus"></i>
                     </a>
                     <span th:text="${cart.quantity}"></span>
                     <a class="btn-delete" th:href="@{/cart/update/{productId}/{amount}(productId=${cart.product.product_id}, amount = ${cart.quantity + 1})}">
-                        +
+                        <i class="fas fa-plus"></i>
                     </a>
                 </div>
             </td>
-            <td th:text="${cart.quantity}"></td>
-            <td th:text="${cart.amountMoney}"></td>
+            <td th:text="${#numbers.formatCurrency(cart.product.getPrice() * cart.quantity)}"></td>
             <td>
-
                 <a class="btn-delete" th:href="@{/cart/delete/{productId}(productId=${cart.product.product_id})}">
-                    Delete
+                    <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
         </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-end mt-3" style="margin-top : 16px">
+        <a href="/checkout">
+            <button class="btn btn-primary btn-lg btn-block">
+                <i class="fas fa-shopping-cart mr-2"></i>
+                CHECKOUT
+            </button>
+        </a>
+    </div>
 </div>
 </body>
 
