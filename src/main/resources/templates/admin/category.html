@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Management</title>
+  <style>
+    td.product-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px; /* Độ rộng tối đa cho product_name */
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: max-content;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px; /* Độ rộng của tooltip */
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    table {
+      border-collapse: separate;
+      border-spacing: 10px; /* Điều chỉnh khoảng cách tùy thích */
+    }
+
+    td {
+      padding: 10px; /* Điều chỉnh khoảng cách tùy thích */
+    }
+  </style>
+</head>
+<body>
+<section class="main" layout:fragment="body">
+  <div class="container">
+    <div class="row">
+      <h1>List Category</h1>
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Warranty</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category: ${category}">
+          <td th:text="${category.typeofproduct_name}"></td>
+          <td th:text="${category.typeofproduct_desc}"></td>
+          <td th:text="${category.warranty_period}"></td>
+          <td style="display: flex; gap: 5px;">
+            <a
+                    th:href="@{/admin/category/list/{id}(id=${category.typeofproduct_id})}"
+                    class="btn">List</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="row">
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

@@ -74,11 +74,10 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(Integer image_id, Integer product_id, String image_src, String color, Product product) {
+    public Image(Integer image_id, Integer product_id, String image_src, String color) {
         this.image_id = image_id;
         this.product_id = product_id;
         this.image_src = image_src;
         this.color = color;
-        this.product = product;
     }
 }

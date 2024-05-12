@@ -25,7 +25,7 @@ public class Product implements Serializable {
 	@JoinColumn(name = "typeofproduct_id",nullable=false)
 	//cho nay can phai manytoone
 	private TypeOfProducts typeofproducts;
-	
+
 	private String product_name;
 	
 	private Integer quantity;
@@ -40,6 +40,10 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Image> images;
 
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
 
 
 	public Product(Integer product_id, Integer saleoff_id, TypeOfProducts typeofproducts, String product_name, Integer quantity, int price, String product_desc) {
