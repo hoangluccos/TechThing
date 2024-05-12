@@ -37,11 +37,8 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	private List<Cart> carts;
 
-	@OneToMany(mappedBy = "product")
-	private List<Image> images;
-	
 	public Product(Integer product_id, SaleOff saleoffs, TypeOfProducts typeofproducts, String product_name,
-			Integer quantity, int price, String product_desc, List<Cart> carts, List<Image> images) {
+			Integer quantity, int price, String product_desc, List<Cart> carts) {
 		super();
 		this.product_id = product_id;
 		this.saleoffs = saleoffs;
@@ -51,7 +48,6 @@ public class Product implements Serializable {
 		this.price = price;
 		this.product_desc = product_desc;
 		this.carts = carts;
-		this.images = images;
 	}
 	
 	public Product() {
