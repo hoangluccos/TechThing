@@ -35,7 +35,7 @@ a {
 }
 /* --------------------Header-------------------- */
 .header {
-  background: #50b07c;
+  background: #49B8EB;
   height: 70px;
   display: flex;
   justify-content: space-evenly;
@@ -51,9 +51,10 @@ a {
 .btn.search input[type="text"] {
   width: 100%; /* Thiết lập chiều rộng của input bằng 100% của khối div */
   box-sizing: border-box; /* Đảm bảo chiều rộng bao gồm cả padding và border */
-  border: none; /* Ẩn border */
-  font-size: 24px;
-  outline: none; /* Ẩn đường viền khi focus */
+  border: none;
+  font-size: 20px;
+  outline: none;
+  margin-top: -20px;
 }
 .header input:focus {
   border: none; /* Ẩn border khi focus */
@@ -87,24 +88,24 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 10px;
 }
 .nav li {
   margin-left: 30px;
-  padding: 13px 16px;
+  padding: 8px 16px;
   width: 140px;
 }
-.nav img {
-  height: 18px;
+.nav a{
+  text-decoration: none;
 }
-
-
-/*--------------------banner--------------------*/
+.nav img {
+  height: 100%;
+}
 .banner {
-  height: 50vh;
-  /* width: 100%; */
-  background-image: url("../../img/banner.png");
-
+  height: 40vh;
   background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 16px;
 }
 /* ============ Body ============ */
 .body {
@@ -113,6 +114,7 @@ a {
 }
 /* ============ Footer ============ */
 .footer {
+  margin-top: 16px;
   height: 150px;
   background: #51566b;
   display: flex;
@@ -122,4 +124,32 @@ a {
   padding: 20px;
   line-height: 1.5;
   color: #fff;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
