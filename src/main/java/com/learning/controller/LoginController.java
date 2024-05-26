@@ -32,10 +32,10 @@ public class LoginController {
 
 	@Autowired
 	RoleService roleService;
-	
+
 	@Autowired
 	ProductService productService;
-	
+
 	@GetMapping({"/login",  "/"})
 	public String showLogin(ModelMap model) {
 		User u = new User();
@@ -48,34 +48,34 @@ public class LoginController {
 
 
 	// try with @pathvariable
-	@PostMapping("/checklogin")
-	public void checkLogin() {}
+//	@PostMapping("/checklogin")
+//	public void checkLogin() {}
 
-	public String checkLogin(ModelMap model, @RequestParam("username") String username,
-							 @RequestParam("password") String password , HttpSession session)  {
-
-		if (userService.checkLogin(username, password)) {
-			session.setAttribute("username", username);
-
-			if (userService.authorization(username, password)) {
-//				System.out.println("login thanh cong");
-				// Authorization here
-				return "redirect:/admin";
-			} else {
-//			day la user/home
-
-			return "redirect:/user/home";
-//				return "user/index";
-
-			}
-		} else {
-			System.out.println("login that bai");
-			model.addAttribute("ERROR", "Username or Password not exist");
-//			return "loginform";
-			return "log_regform";
-		}
-
-	}
+//	public String checkLogin(ModelMap model, @RequestParam("username") String username,
+//							 @RequestParam("password") String password , HttpSession session)  {
+//
+//		if (userService.checkLogin(username, password)) {
+//			session.setAttribute("username", username);
+//
+//			if (userService.authorization(username, password)) {
+////				System.out.println("login thanh cong");
+//				// Authorization here
+//				return "redirect:/admin";
+//			} else {
+////			day la user/home
+//
+//			return "redirect:/user/home";
+////				return "user/index";
+//
+//			}
+//		} else {
+//			System.out.println("login that bai");
+//			model.addAttribute("ERROR", "Username or Password not exist");
+////			return "loginform";
+//			return "log_regform";
+//		}
+//
+//	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
