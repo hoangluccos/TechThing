@@ -8,6 +8,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+.list-item a {
+  text-decoration: none;
+}
 .item {
   width: 22%;
   /* max-width: 250px; */
@@ -16,11 +19,12 @@
   text-align: center;
   border: 1px solid #ccc;
   margin: 4px;
-  background: #b5f6df;
+  background: #FFFFFF;
 }
 .item img {
   width: 60%;
   min-height: 180px;
+  object-fit: cover;
 }
 .item .saleoff {
   color: red;
