@@ -21,26 +21,11 @@ public class RegisterController {
     RoleService roleService;
     @Autowired
     ProductService productService;
-//    @GetMapping("/register")
-//    public String register(ModelMap model) {
-//        User u = new User();
-////		u.setUsername("");
-//        model.addAttribute("USER", u);
-//        model.addAttribute("ACTION", "/saveOrUpdate");
-//        return "register-user";
-//    }
 
     @Autowired
     private PasswordEncoder passwordEncoder;
     @PostMapping("/saveOrUpdate")
     public String saveOrUpdate(@ModelAttribute("USER") User user) {
-//		UserDAO dao = new UserDAO();
-//		dao.save(user);
-//        int role_id = 2;
-//        Role role = roleService.findById(2).get();
-//		user.setRole(role);
-//        userService.save(user);
-
         System.out.println("Da vao dang ky");
         User newUser = new User();
         newUser.setUsername(user.getUsername());
