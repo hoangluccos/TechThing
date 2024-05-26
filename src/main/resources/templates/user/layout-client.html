@@ -14,17 +14,31 @@
   <body>
     <header class="content">
       <div class="header">
-        <img th:src="@{'../../img/logo.png'}" alt="Logo" />
+        <img th:src="@{'../../../img/logo.png'}" alt="Logo" />
         <div class="btn search">
-          <i class="fas fa-search"> </i>
+          <div class="searching">
+            <form th:action="@{/page/1}">
+              <input type="text" name="keyword" th:value="${keyword}" placeholder="Search...">
+              <input type="hidden" name="sortField" th:value="${sortField}" />
+              <input type="hidden" name="sortDir" th:value="${sortDir}" />
+            </form>
+          </div>
+          <i class="fas fa-search"></i>
         </div>
+
         <div class="action">
           <div class="btn action-btn">
             <a href="/cart"><i class="fas fa-shopping-cart"> </i></a>
           </div>
           <div class="btn action-btn">
-          	<a href="/user/user_info/{id}">
+          	<a href="/user/user_info">
             	<i class="fas fa-user"></i>
+            </a>
+          </div>
+          <!-- logout -->
+          <div class="btn action-btn">
+            <a href="/logout">
+              <i class="fas fa-sign-out-alt"></i>
             </a>
           </div>
         </div>
@@ -33,13 +47,13 @@
       <div class="nav">
         <ul>
           <li class="btn"><i class="fas fa-home"></i> <a href="/user/home">Home</a></li>
-          <li class="btn"><i class="fas fa-laptop"></i> <a href="/user/category/laptop">Laptop</a></li>
-          <li class="btn"><i class="fas fa-mobile"></i> <a href="/user/category/phone">Phone</a></li>
-          <li class="btn"><i class="fas fa-tablet"></i> <a href="/user/category/tablet">Tablet</a></li>
-          <li class="btn">
-            <img th:src="@{'../../img/watch.png'}" alt="watch" /> <a href="/user/category/watch">Watch</a>
+          <li class="btn"><i class="fas fa-laptop"></i> <a href="/user/category/laptop/1">Laptop</a></li>
+          <li class="btn"><i class="fas fa-mobile"></i> <a href="/user/category/phone/1">Phone</a></li>
+          <li class="btn"><i class="fas fa-tablet"></i> <a href="/user/category/tablet/1">Tablet</a></li>
+          <li class="btn ">
+            <img th:src="@{'../../../img/watch.png'}" alt="watch" /> <a href="/user/category/watch/1">Watch</a>
           </li>
-          <li class="btn"><i class="fas fa-desktop"></i> <a href="/user/category/pc"> PC</a> </li>
+          <li class="btn"><i class="fas fa-desktop"></i> <a href="/user/category/pc/1"> PC</a> </li>
         </ul>
       </div>
       <div class="banner"></div>

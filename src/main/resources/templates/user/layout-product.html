@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" 	th:href="@{/css/user/header_footer.css}" />
+    <title>Document</title>
+</head>
+<body>
+<header class="content">
+    <div class="header">
+        <img th:src="@{'../../../img/logo.png'}" alt="Logo" />
+        <div class="btn search">
+            <div class="searching">
+                <form th:action="@{/page/1}">
+                    <input type="text" name="keyword" th:value="${keyword}" placeholder="Search...">
+                    <input type="hidden" name="sortField" th:value="${sortField}" />
+                    <input type="hidden" name="sortDir" th:value="${sortDir}" />
+                </form>
+            </div>
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="action">
+            <div class="btn action-btn">
+                <a href="/cart"><i class="fas fa-shopping-cart"> </i></a>
+            </div>
+<!--            <div class="dropdown">-->
+                <div class="btn action-btn dropdown-toggle">
+                    <a href="/user/user_info">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+<!--                <div class="dropdown-menu">-->
+<!--                    <a href="/user/user_info" class="dropdown-item">User Info</a>-->
+<!--                    <a href="#" class="dropdown-item">Order</a>-->
+<!--                    <a href="/logout" class="dropdown-item">Logout</a>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- logout -->
+            <div class="btn action-btn">
+                <a href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <ul>
+            <li class="btn"><i class="fas fa-home"></i> <a href="/user/home">Home</a></li>
+            <li class="btn"><i class="fas fa-laptop"></i> <a href="/user/category/laptop/1">Laptop</a></li>
+            <li class="btn"><i class="fas fa-mobile"></i> <a href="/user/category/phone/1">Phone</a></li>
+            <li class="btn"><i class="fas fa-tablet"></i> <a href="/user/category/tablet/1">Tablet</a></li>
+            <li class="btn">
+                <img th:src="@{'../../../img/watch.png'}" alt="watch" /> <a href="/user/category/watch/1">Watch</a>
+            </li>
+            <li class="btn"><i class="fas fa-desktop"></i> <a href="/user/category/pc/1"> PC</a> </li>
+        </ul>
+    </div>
+</header>
+<div class="body content" layout:fragment="body"></div>
+
+<div class="footer content">
+    <div class="payment">
+        <ul>
+            <li>Hỗ trợ thanh toán</li>
+            <li>Thanh toán visa</li>
+            <li>Thanh toán ATM</li>
+            <li>Thanh toán trực tiếp</li>
+        </ul>
+    </div>
+    <div class="advise">
+        <ul>
+            <li>Tư vấn khách hàng</li>
+            <li>Kỹ thuật : 0123456</li>
+            <li>Mua hàng : 0123456</li>
+            <li>Chi nhánh : 0123456</li>
+        </ul>
+    </div>
+    <div class="branch">
+        <ul>
+            <li>Chi nhánh</li>
+            <li>Chi nhánh 1:Số 1 Võ Văn Ngân, Thủ đức</li>
+            <li>Chi nhánh 2:Số 1 Võ Văn Ngân, Thủ đức</li>
+        </ul>
+    </div>
+</div>
+<script>
+    document.querySelectorAll(".dropdown").forEach(function(dropdown) {
+        dropdown.addEventListener("mouseenter", function() {
+            this.classList.add("show");
+            this.querySelector(".dropdown-menu").classList.add("show");
+        });
+        dropdown.addEventListener("mouseleave", function() {
+            this.classList.remove("show");
+            this.querySelector(".dropdown-menu").classList.remove("show");
+        });
+    });
+</script>
+</body>
+</html>

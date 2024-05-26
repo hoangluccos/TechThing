@@ -21,6 +21,8 @@ public class CartServiceImpl implements CartService{
     CartRepository cartRepository;
     @Autowired
     UserRepository userRepository;
+
+
     @Override
     public List<Cart> getListCartProductByUserName(String username) {
         List<Cart> cartListAll = cartRepository.findAll();
@@ -65,5 +67,6 @@ public class CartServiceImpl implements CartService{
         cart.setAmountMoney(product.getPrice() * 1);
         cartRepository.save(cart);
     }
+
 
 }

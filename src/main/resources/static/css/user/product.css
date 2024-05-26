@@ -1,0 +1,154 @@
+/* product.css */
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Product Gallery */
+.border.rounded-4 {
+  border-radius: 1rem !important;
+}
+
+.fit {
+  object-fit: cover;
+}
+
+.mx-1 {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}
+
+.border.mx-1.rounded-2 {
+  border-radius: 0.5rem !important;
+}
+
+/* Product Details */
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.row.mb-4.d-flex.align-items-center {
+  align-items: center !important;
+}
+
+.col-md-4.col-6.mb-3.d-flex.align-items-center {
+  align-items: center !important;
+}
+
+.input-group.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.btn.btn-warning.shadow-0 {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  box-shadow: none !important;
+}
+
+.btn.btn-primary.shadow-0 {
+  background-color: #007bff;
+  border-color: #007bff;
+  box-shadow: none !important;
+}
+
+.btn.btn-light.border.border-secondary.py-2.icon-hover.px-3 {
+  border-color: #ced4da !important;
+}
+
+.icon-hover:hover i {
+  color: #007bff !important;
+}
+
+/* New CSS added */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-lg-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.d-flex.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+}
+
+.product-rating i {
+  color: #ffc107;
+  margin-right: 0.25rem;
+}
+
+.product-rating span {
+  margin-left: 0.5rem;
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.product-name {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.product-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.product-details .aside {
+  width: 50%;
+  margin-right: 1rem;
+}
+
+.product-details .main-content {
+  flex-grow: 1;
+}
+
+.product-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6600;
+  margin-top: 0.5rem;
+}

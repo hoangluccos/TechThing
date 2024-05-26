@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .user-info-container {
+            margin-top: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .user-info-table {
+            margin: 0 auto;
+        }
+        .user-info-table th,
+        .user-info-table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="body content" layout:fragment="body">
+    <div class="user-info-container">
+        <span class="larger bold"  style="color: red; font-weight: bold">Tong Doanh Thu:  [[${tongDoanhThu}]]</span>
+    </div>
+    <table class="user-info-table">
+        <thead>
+        <tr>
+            <th>Hoa Don ID</th>
+            <th>San Pham</th>
+            <th>So Luong</th>
+            <th>Tong Tien</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hd: ${hoaDons}">
+            <td th:text="${hd.getInvoice_id().getInvoice_id()}"></td>
+            <td th:text="${hd.getProduct().getProduct_name()}"></td>
+            <td th:text="${hd.getQuantity()}"></td>
+            <td> [[${hd.getAmount()}]]</td>
+            <!--            <td><a th:href="@{/user/user_info/edit/{id}(id=${user.username})}" class="btn">Update</a></td>-->
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

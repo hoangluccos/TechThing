@@ -1,23 +1,68 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-product.html}">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Home User</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/css/user/product.css}" />
 </head>
+
 <body>
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="card-title" th:text="${product.product_name}">Product Name</h1>
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="card-text">
-                                <strong>Price:</strong> <span th:text="${#numbers.formatCurrency(product.price)}">$0.00</span>
-                            </p>
+<div class="body content" layout:fragment="body">
+    <div class="container py-5">
+        <div class="product-details">
+            <aside class="aside">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center" th:if="${#lists.size(images) > 0}">
+                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" th:href="${images[0].image_src}">
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" th:src="${images[0].image_src}" th:alt="${images[0].color}">
+                    </a>
+                </div>
+                <div class="border rounded-4 mb-3 d-flex justify-content-center" th:if="${#lists.size(images) == 0}">
+                    <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="/images/no-image.jpg" alt="No Image">
+                </div>
+                <div class="d-flex justify-content-center mb-3" th:if="${#lists.size(images) > 0}">
+                    <th:block th:each="image : ${images}">
+                        <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" th:href="${image.image_src}">
+                            <img width="60" height="60" class="rounded-2" th:src="${image.image_src}" th:alt="${image.color}">
+                        </a>
+                    </th:block>
+                </div>
+            </aside>
+            <div class="main-content">
+                <div class="product-info">
+                    <h4 class="title text-dark product-name" th:text="${product.product_name}"></h4>
+                    <div class="product-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ms-1">4.5</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="mb-3">
+                        <span class="product-price" th:text="${#numbers.formatCurrency(product.price)}"></span>
+                    </div>
+                </div>
+                <p th:text="${product.product_desc}"></p>
+                <div class="row">
+                    <dd class="col-9" th:text="${#lists.size(images) > 0 ? images[0].color : 'No Color'}"></dd>
+                </div>
+                <hr>
+                <div class="row mb-4">
+                    <div class="col-12 d-flex flex-column align-items-end"><div class="d-flex align-items-center mb-3">
+                        <label class="mb-2 me-3">Quantity:</label>
+                        <span class="product-quantity" th:text="${product.quantity}"></span>
+                    </div>
+                        <div>
+                            <a href="#" class="btn btn-warning shadow-0 mb-2 font-weight-bold"> Buy now </a>
+                            <a href="#" class="btn btn-primary shadow-0 mb-2 font-weight-bold"  th:href="@{/cart/add/{productId}(productId=${product.product_id})}">
+                                <i class="me-1 fa fa-shopping-basket"></i>
+                                Add to cart
+                            </a>
+                            <a href="#" class="btn btn-light border border-secondary py-2 icon-hover mb-2 font-weight-bold"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
                         </div>
                     </div>
                 </div>

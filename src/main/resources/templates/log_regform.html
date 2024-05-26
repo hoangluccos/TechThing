@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 
 <head>
 	<meta charset="UTF-8" />
@@ -32,7 +32,7 @@
 						<a href="#" class="social-icon">
 							<i class="fab fa-twitter"></i>
 						</a>
-						<a href="#" class="social-icon">
+						<a th:href="@{/oauth2/authorization/google}"  class="social-icon">
 							<i class="fab fa-google"></i>
 						</a>
 						<a href="#" class="social-icon">
@@ -86,7 +86,7 @@
 					<p>Hãy tạo tài khoản và cùng nhau mua sắm!</p>
 					<button class="btn transparent" id="sign-up-btn">Sign up</button>
 				</div>
-				<img src="img/log.svg" class="image" alt="" />
+				<img src="/img/log.svg" class="image" alt="Anh Login" />
 			</div>
 			<div class="panel right-panel">
 				<div class="content">

@@ -42,4 +42,6 @@ public interface UserService {
 	boolean authorization(String username, String password);
 
 	void registerDefaultUser(User user);
+	void processOAuthPostLogin(String username);
+
 }

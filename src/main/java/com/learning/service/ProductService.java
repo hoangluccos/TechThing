@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.learning.model.Product;
+import org.springframework.data.domain.Page;
 
 public interface ProductService {
 
@@ -32,4 +33,7 @@ public interface ProductService {
 	Product save(Product entity);
 
 	List<Product> findProductsByType(Integer id);
+	Page<Product> listAll(int pageNum, String sortField, String sortDir, String keyword);
+	Page<Product> listAllByCategory(int pageNum, String sortField, String sortDir, String keyword);
+	public List<String> getImageSrcsByProductId(int productId);
 }

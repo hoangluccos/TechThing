@@ -3,6 +3,7 @@ package com.learning.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.learning.model.Provider;
 import com.learning.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -114,5 +115,19 @@ public class UserServiceImpl implements UserService {
 		user.addRole(role);
 
 		userRepository.save(user);
+	}
+	@Override
+	public void processOAuthPostLogin(String username) {
+		User existUser = userRepository.getUserByUsername(username);
+
+		if (existUser == null) {
+			User newUser = new User();
+			newUser.setUsername(username);
+			newUser.setProvider(Provider.GOOGLE);
+			Role role = roleRepo.findById(2).get(); //tao tai khoan mac dinh gan role User
+			newUser.addRole(role);
+			userRepository.save(newUser);
+		}
+
 	}
 }

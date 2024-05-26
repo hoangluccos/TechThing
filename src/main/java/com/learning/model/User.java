@@ -2,6 +2,7 @@ package com.learning.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,12 +27,12 @@ public class User implements Serializable {
 
     private String mail;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private Set<UserRole> userRoles;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "username")
+    private List<Invoices> invoices;
 
     public User() {
         super();
@@ -39,5 +40,11 @@ public class User implements Serializable {
     public void addRole(Role role) {
         this.roles.add(role);
     }
+
+
+    //oauth2 login with google
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
 
 }

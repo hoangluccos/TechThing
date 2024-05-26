@@ -1,98 +1,159 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Product</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Update Product</title>
+	<style>
+		/* Styles for form */
+		.form-group {
+			margin-bottom: 1.5rem;
+		}
+
+		.form-group label {
+			font-weight: bold;
+		}
+
+		.form-control {
+			border-radius: 0.25rem;
+			padding: 0.5rem 0.75rem;
+		}
+
+		.box-footer {
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 1.5rem;
+		}
+
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+			color: #fff;
+			font-weight: bold;
+			padding: 0.5rem 1rem;
+			border-radius: 0.25rem;
+		}
+
+		.btn-primary:hover {
+			background-color: #0056b3;
+			border-color: #004a99;
+		}
+
+		/* Styles for table */
+		.table {
+			width: 100%;
+			margin-top: 2rem;
+			border-collapse: collapse;
+		}
+
+		.table th,
+		.table td {
+			padding: 0.75rem;
+			text-align: left;
+			border-bottom: 1px solid #dee2e6;
+		}
+
+		.table th {
+			background-color: #f7f7f7;
+			font-weight: bold;
+		}
+
+		.table tbody tr:hover {
+			background-color: #f7f7f7;
+		}
+		.image-item {
+			margin-bottom: 1rem;
+		}
+	</style>
 </head>
 <body>
-	<section layout:fragment="body">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-					<div class="card-body">
+<section layout:fragment="body">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<div class="card-body">
 					<h1 class="text-center">Update Product</h1>
-						<form th:action="@{/admin/product/save_edit}" th:object=" ${product}" method="POST"><!-- de y dong nay -->
+					<form th:action="@{/admin/product/save_edit}" th:object="${product}" method="POST">
+						<table class="table">
+<!--							<tr>-->
+<!--								<td><label>Product ID</label></td>-->
+<!--								<td><input id="product_id" type="number" name="product_id" th:field="*{product_id}" class="form-control" placeholder="Enter Product ID" /></td>-->
+<!--							</tr>-->
 							<div class="form-group">
-								<label>Product ID</label>
-								<input id="product_id"
-									type="number"
-									name="product_id"
-									th:field="*{product_id}"
-									class = "form-controll"
-									placeholder="Enter Product ID"
-									/>
-							</div>
- 							<div class="form-group">
 								<label>Safeoff</label>
-								<input id="saleoff_id"
-									type="number"
-									name="saleoff_id"
-									th:field="*{saleoff_id}"
-									class = "form-controll"
-									placeholder="Enter Safeoff ID"
-									/>
+								<select th:field="${product.saleoffs}" class="form-control" required>
+									<th:block th:each="saleoff: ${listsaleoffs}">
+										<option th:text="${saleoff.saleoff_percent} + '%'" th:value="${saleoff.saleoff_id}"/>
+									</th:block>
+								</select>
 							</div>
 							<div class="form-group">
 								<label>Type</label>
-								<input id="typeofproduct_id"
-									type="number"
-									name="typeofproduct_id"
-									th:field="*{typeofproduct_id}"
-									class = "form-controll"
-									placeholder="Enter TypeofProduct ID"
-									/>
+								<select th:field="${product.typeofproducts}" class="form-control" required>
+									<th:block th:each="category: ${listcategories}">
+										<option th:text="${category.typeofproduct_name}" th:value="${category.typeofproduct_id}"/>
+									</th:block>
+								</select>
 							</div>
-							<div class="form-group">
-								<label>Name</label>
-								<input id="product_name"
-									type="text"
-									name="product_name"
-									th:field="*{product_name}"
-									class = "form-controll"
-									placeholder="Enter Product Name"
-									/>
+							<tr>
+								<td><label>Name</label></td>
+								<td><input id="product_name" type="text" name="product_name" th:field="*{product_name}" class="form-control" placeholder="Enter Product Name" /></td>
+							</tr>
+							<tr>
+								<td><label>Quantity</label></td>
+								<td><input id="quantity" type="number" name="quantity" th:field="*{quantity}" class="form-control" placeholder="Enter Quantity" /></td>
+							</tr>
+							<tr>
+								<td><label>Price</label></td>
+								<td><input id="price" type="number" name="price" th:field="*{price}" class="form-control" placeholder="Enter Price" /></td>
+							</tr>
+							<tr>
+								<td><label>Description</label></td>
+								<td><input id="product_desc" type="text" name="product_desc" th:field="*{product_desc}" class="form-control" placeholder="Enter Description" /></td>
+							</tr>
+						</table>
+						<div class="form-group">
+							<label>Images</label>
+							<div class="image-container">
+								<div th:each="imageSource, iter : ${imageSources}" class="image-item" style="margin-bottom: 1rem;">
+									<input type="text" th:value="${imageSource}" name="imageSources" class="form-control" />
+									<button type="button" class="btn btn-danger" th:onclick="|deleteImage(${iter.index})|">Delete</button>
+								</div>
+								<div class="image-item" style="margin-bottom: 1rem;">
+									<input type="text" name="imageSources" class="form-control" placeholder="Enter image URL" />
+									<button type="button" class="btn btn-primary" onclick="addImage()">Add Image</button>
+								</div>
 							</div>
-							<div class="form-group">
-								<label>Quantity</label>
-								<input id="quantity"
-									type="number"
-									name="quantity"
-									th:field="*{quantity}"
-									class = "form-controll"
-									placeholder="Enter Quantity"
-									/>
-							</div>
-							<div class="form-group">
-								<label>Price</label>
-								<input id="price"
-									type="number"
-									name="price"
-									th:field="*{price}"
-									class = "form-controll"
-									placeholder="Enter Price"
-									/>
-							</div>
-							<div class="form-group">
-								<label>Description</label>
-								<input id="product_desc"
-									type="text"
-									name="product_desc"
-									th:field="*{product_desc}"
-									class = "form-controll"
-									placeholder="Enter Description"
-									/>
-							</div>
-							<div class ="box-footer">
-								<button type="submit" class = "btn btn-primary">
-									Submit
-								</button>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+	<script>
+		var imageCount = 1;
+
+		function addImage() {
+			var imageContainer = document.querySelector('.image-container');
+			var newInput = document.createElement('div');
+			newInput.classList.add('image-item');
+			newInput.innerHTML = `
+                <input type="text" name="imageSources" class="form-control" placeholder="Enter image URL" />
+                <button type="button" class="btn btn-danger" onclick="deleteImage(${imageCount})">Delete</button>
+            `;
+			imageContainer.appendChild(newInput);
+			imageCount++;
+		}
+
+		function deleteImage(index) {
+			var imageItems = document.querySelectorAll('.image-item');
+			imageItems[index].remove();
+			imageCount--;
+		}
+	</script>
+</section>
 </body>
 </html>
