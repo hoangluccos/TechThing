@@ -75,10 +75,10 @@
 					<h1 class="text-center">Update Product</h1>
 					<form th:action="@{/admin/product/save_edit}" th:object="${product}" method="POST">
 						<table class="table">
-<!--							<tr>-->
-<!--								<td><label>Product ID</label></td>-->
-<!--								<td><input id="product_id" type="number" name="product_id" th:field="*{product_id}" class="form-control" placeholder="Enter Product ID" /></td>-->
-<!--							</tr>-->
+							<tr>
+								<td><label>Product ID</label></td>
+								<td><input id="product_id" type="number" name="product_id" th:field="*{product_id}" class="form-control" placeholder="Enter Product ID" /></td>-->
+							</tr>
 							<div class="form-group">
 								<label>Safeoff</label>
 								<select th:field="${product.saleoffs}" class="form-control" required>
@@ -97,22 +97,22 @@
 							</div>
 							<tr>
 								<td><label>Name</label></td>
-								<td><input id="product_name" type="text" name="product_name" th:field="*{product_name}" class="form-control" placeholder="Enter Product Name" /></td>
+								<td><input id="product_name" type="text" name="product_name" th:field="*{product_name}" class="form-control" placeholder="Enter Product Name" required/></td>
 							</tr>
 							<tr>
 								<td><label>Quantity</label></td>
-								<td><input id="quantity" type="number" name="quantity" th:field="*{quantity}" class="form-control" placeholder="Enter Quantity" /></td>
+								<td><input id="quantity" type="number" name="quantity" th:field="*{quantity}" class="form-control" placeholder="Enter Quantity" required/></td>
 							</tr>
 							<tr>
 								<td><label>Price</label></td>
-								<td><input id="price" type="number" name="price" th:field="*{price}" class="form-control" placeholder="Enter Price" /></td>
+								<td><input id="price" type="number" name="price" th:field="*{price}" class="form-control" placeholder="Enter Price" required/></td>
 							</tr>
 							<tr>
 								<td><label>Description</label></td>
-								<td><input id="product_desc" type="text" name="product_desc" th:field="*{product_desc}" class="form-control" placeholder="Enter Description" /></td>
+								<td><input id="product_desc" type="text" name="product_desc" th:field="*{product_desc}" class="form-control" placeholder="Enter Description" required/></td>
 							</tr>
 						</table>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label>Images</label>
 							<div class="image-container">
 								<div th:each="imageSource, iter : ${imageSources}" class="image-item" style="margin-bottom: 1rem;">
@@ -124,7 +124,7 @@
 									<button type="button" class="btn btn-primary" onclick="addImage()">Add Image</button>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
@@ -133,27 +133,27 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		var imageCount = 1;
+	<!--	<script>
+            var imageCount = 1;
 
-		function addImage() {
-			var imageContainer = document.querySelector('.image-container');
-			var newInput = document.createElement('div');
-			newInput.classList.add('image-item');
-			newInput.innerHTML = `
-                <input type="text" name="imageSources" class="form-control" placeholder="Enter image URL" />
-                <button type="button" class="btn btn-danger" onclick="deleteImage(${imageCount})">Delete</button>
-            `;
-			imageContainer.appendChild(newInput);
-			imageCount++;
-		}
+            function addImage() {
+                var imageContainer = document.querySelector('.image-container');
+                var newInput = document.createElement('div');
+                newInput.classList.add('image-item');
+                newInput.innerHTML = `
+                    <input type="text" name="imageSources" class="form-control" placeholder="Enter image URL" />
+                    <button type="button" class="btn btn-danger" onclick="deleteImage(${imageCount})">Delete</button>
+                `;
+                imageContainer.appendChild(newInput);
+                imageCount++;
+            }
 
-		function deleteImage(index) {
-			var imageItems = document.querySelectorAll('.image-item');
-			imageItems[index].remove();
-			imageCount--;
-		}
-	</script>
+            function deleteImage(index) {
+                var imageItems = document.querySelectorAll('.image-item');
+                imageItems[index].remove();
+                imageCount--;
+            }
+        </script>-->
 </section>
 </body>
 </html>

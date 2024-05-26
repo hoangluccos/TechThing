@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout-admin.html}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
-    <style>
-    td.product-name {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 150px; /* Độ rộng tối đa cho product_name */
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Management</title>
+	<style>
+		td.product-name {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 150px; /* Độ rộng tối đa cho product_name */
+		}
+		.tooltip {
+			position: relative;
+			display: inline-block;
+			cursor: pointer;
+		}
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: max-content;
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 5px 10px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px; /* Độ rộng của tooltip */
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			width: max-content;
+			background-color: #000;
+			color: #fff;
+			text-align: center;
+			padding: 5px 10px;
+			border-radius: 6px;
+			position: absolute;
+			z-index: 1;
+			bottom: 125%;
+			left: 50%;
+			margin-left: -60px; /* Độ rộng của tooltip */
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        table {
-            border-collapse: separate;
-            border-spacing: 10px; /* Điều chỉnh khoảng cách tùy thích */
-        }
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+			opacity: 1;
+		}
+		table {
+			border-collapse: separate;
+			border-spacing: 10px; /* Điều chỉnh khoảng cách tùy thích */
+		}
 
-        td {
-            padding: 10px; /* Điều chỉnh khoảng cách tùy thích */
-        }
-    </style>
+		td {
+			padding: 10px; /* Điều chỉnh khoảng cách tùy thích */
+		}
+	</style>
 </head>
 <body>
-    <section layout:fragment="body">
-		<div class="container">
-			<div class="row">
-				<h1>List User</h1>
-				<table>
-					<thead>
-						<tr>
-							<th>UserName</th>
-							<!-- <th>Role</th> -->
-							<th>FullName</th>
-							<th>Email</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:href="@{/user/user_info/{id}(id=${user.username})}"
-							th:each="user: ${users}">
-							<td th:text="${user.username}"></td>
-							<!-- <td th:text="${user.role}"></td> -->
-							<td th:text="${user.fullname}"></td>
-							<td th:text="${user.mail}"></td>
-							<td style="display: flex; gap: 5px;">
-								<a
+<section layout:fragment="body">
+	<div class="container">
+		<div class="row">
+			<h1>List User</h1>
+			<table>
+				<thead>
+				<tr>
+					<th>UserName</th>
+					<!-- <th>Role</th> -->
+					<th>FullName</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:href="@{/user/user_info/{id}(id=${user.username})}"
+					th:each="user: ${users}">
+					<td th:text="${user.username}"></td>
+					<!-- <td th:text="${user.role}"></td> -->
+					<td th:text="${user.fullname}"></td>
+					<td th:text="${user.mail}"></td>
+					<td style="display: flex; gap: 5px;">
+						<a
 								th:href="@{/admin/user/delete/{id}(id=${user.username})}"
 								class="btn btn-danger btn-sm">Delete</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
 </html>
