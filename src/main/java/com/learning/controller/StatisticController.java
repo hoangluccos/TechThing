@@ -19,26 +19,25 @@ public class StatisticController {
     InvoicesDetailService invoicesDetailService;
     @Autowired
     InvoicesService invoicesService;
-    @GetMapping("/admin/thong-ke")
+    @GetMapping("/admin/hoa-don")
     public String thongKe(Model model) {
         List<InvoiceDetail> hoaDons = invoicesDetailService.findAll();
-        // Tính toán tổng doanh thu từ các hóa đơn
+
         double tongDoanhThu = calculateTotalRevenue(hoaDons);
 
-        // Đưa dữ liệu vào model để sử dụng trong HTML
+
         model.addAttribute("hoaDons", hoaDons);
         model.addAttribute("tongDoanhThu", tongDoanhThu);
 
-        // Trả về tên của trang HTML để hiển thị biểu đồ doanh thu
-        return "admin/thong-ke";
+
+        return "admin/hoa-don";
     }
     private double calculateTotalRevenue(List<InvoiceDetail> hoaDons) {
 
         double totalRevenue = 0.0;
 
-        // Duyệt qua từng hóa đơn trong danh sách và cộng tổng số tiền từ mỗi hóa đơn vào biến tổng
         for (InvoiceDetail hoaDon : hoaDons) {
-            totalRevenue += hoaDon.getAmount(); // Giả sử bạn có một phương thức getter để lấy tổng tiền từ mỗi hóa đơn
+            totalRevenue += hoaDon.getAmount();
         }
 
         return totalRevenue;

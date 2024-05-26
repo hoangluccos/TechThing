@@ -33,20 +33,14 @@ import java.util.*;
 public class UserController {
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-    private ProductService productService;
 
-	//---- user home
+	@Autowired
+	private ProductService productService;
+
+	//---------user home---------
 	@GetMapping("/user/home")
 	public String userHome(Model model, HttpSession session)
 	{
-//		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
-//		System.out.println(userDetails.getUsername());
-//		model.addAttribute("products", productService.findAll());
-//		return "user/index";
-
-
 		//---phan trang - pagination
 		String keyword = "";
 		return viewPage(model, 1, "id", "asc", keyword, session);
@@ -88,12 +82,12 @@ public class UserController {
 		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
 		model.addAttribute("reverseDir", reverseDir);
 
-		return "user/index";
+		return "user/homeUser";
 	}
 
 	//end - pagination
 
-	//---- category laptop
+	//---------category---------
 	@GetMapping("/user/category/laptop/{pageNum}")
 	public String category_laptop(Model model, @PathVariable(name = "pageNum")int pageNum,
 								  @Param("keyword")String keyword)
@@ -132,7 +126,7 @@ public class UserController {
 		String reverseDir = sortDir.equals("asc") ? "desc" : "asc";
 		model.addAttribute("reverseDir", reverseDir);
 
-		return "user/index";
+		return "user/homeUser";
 
 
 	}
@@ -165,48 +159,7 @@ public class UserController {
 
 	}
 
-
-
-
-	//--------------------Belong to Admin--------------------
-	@GetMapping("/admin/user")
-	public String listUser(Model model)
-	{
-		model.addAttribute("users", userService.findAll());
-		return "admin/user";
-
-	}
-	
-	/*
-	 * @GetMapping("/user/user_info/edit/{id}") public String
-	 * userEditInfo(@PathVariable String id, Model model) { model.addAttribute(id,
-	 * model) }
-	 */
-	
-//	@GetMapping("/register")
-//	public String addOrEdit(ModelMap model) {
-//		User u = new User();
-//		model.addAttribute("USER", u);
-//		model.addAttribute("ACTION", "/saveOrUpdate");
-//		return "register-user";
-//	}
-
-//	@PostMapping("/saveOrUpdate")
-//	public String saveOrUpdate(ModelMap model, @ModelAttribute("USER") User user) {
-////		UserDAO dao = new UserDAO();
-////		dao.save(user);
-////		System.out.println("Thanh cong");
-//		user.setRole_id(2);
-//		userService.save(user);
-//		return "register-user";
-//	}
-	
-	@GetMapping("/admin/user/delete/{id}")
-	public String deleteUser(@PathVariable String id) {
-		userService.deleteById(id);
-		return "redirect:/admin/user";
-	}
-	
+	// ---------USER INFO---------
 	@Autowired
 	InvoicesService invoicesService;
 	@Autowired
@@ -242,7 +195,7 @@ public class UserController {
 
 
 		model.addAttribute("user", userService.findByUsername(userDetails.getUsername()));
-		return "user/edit";
+		return "user/edit-user";
 	}
 	@PostMapping("/user/save")
 	public String saveUser(@ModelAttribute ("user") User user ){
