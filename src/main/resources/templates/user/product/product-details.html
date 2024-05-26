@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-product.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
 
 <head>
     <title>Home User</title>
@@ -57,7 +57,7 @@
                         <span class="product-quantity" th:text="${product.quantity}"></span>
                     </div>
                         <div>
-                            <a href="#" class="btn btn-warning shadow-0 mb-2 font-weight-bold"> Buy now </a>
+                            <a href="/checkout" class="btn btn-warning shadow-0 mb-2 font-weight-bold"> Buy now </a>
                             <a href="#" class="btn btn-primary shadow-0 mb-2 font-weight-bold"  th:href="@{/cart/add/{productId}(productId=${product.product_id})}">
                                 <i class="me-1 fa fa-shopping-basket"></i>
                                 Add to cart

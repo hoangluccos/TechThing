@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-product.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
 
 <head>
     <title>Cart Page</title>
@@ -49,7 +49,8 @@
         </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-end mt-3" style="margin-top : 16px">
+    <!--	th:if="${carts != null and not #lists.isEmpty(carts)}"-->
+    <div class="d-flex justify-content-end mt-3" 	th:if="${carts != null and not #lists.isEmpty(carts)}" style="margin-top : 16px">
         <a href="/checkout">
             <button class="btn btn-primary btn-lg btn-block">
                 <i class="fas fa-shopping-cart mr-2"></i>

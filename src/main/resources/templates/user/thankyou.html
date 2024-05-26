@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{user/layout-client.html}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-<h1>Đơn hàng của bạn đã được đặt thành công</h1>
+<div class="body content" layout:fragment="body">
+    <h2>Đơn hàng của bạn đã được đặt thành công. Cảm ơn bạn đã mua hàng</h2>
+    <a href="/user/home"><button>Tiếp tục mua hàng</button></a>
+</div>
 </body>
 </html>
