@@ -83,10 +83,10 @@ public class ProductController {
 			model.addAttribute("product", product);
 			model.addAttribute("listcategories", category);
 			model.addAttribute("listsaleoffs", saleoff);
-			model.addAttribute("images", product.getImages());
-			model.addAttribute("imageSources", product.getImages().stream()
-					.map(Image::getImage_src)
-					.collect(Collectors.toList()));
+//			model.addAttribute("images", product.getImages());
+//			model.addAttribute("imageSources", product.getImages().stream()
+//					.map(Image::getImage_src)
+//					.collect(Collectors.toList()));
 			return "admin/edit_product";
 		} else {
 			return "error/404";
@@ -95,34 +95,37 @@ public class ProductController {
 
 	@PostMapping("/admin/product/save_edit")
 	public String updateProduct(
-			@ModelAttribute("product") Product product,
-			@RequestParam("imageSources") String[] imageSources) {
-		try {
-			// Lưu thông tin sản phẩm
-			productService.save(product);
+			@ModelAttribute("product") Product product) {
+//			,@RequestParam("imageSources") String[] imageSources) {
 
-			// Xử lý các ảnh
-			List<Image> existingImages = imageService.getImagesByProductId(product.getProduct_id());
-			for (int i = 0; i < imageSources.length; i++) {
-				String imageSource = imageSources[i];
-				if (imageSource != null && !imageSource.trim().isEmpty()) {
-					if (i < existingImages.size()) {
-						// Cập nhật ảnh hiện có
-						existingImages.get(i).setImage_src(imageSource);
-						imageService.save(existingImages.get(i));
-					} else {
-						// Thêm ảnh mới
-						Image image = new Image(null, product.getProduct_id(), imageSource, null);
-						imageService.save(image);
-					}
-				} else if (i < existingImages.size()) {
-					// Xóa ảnh nếu URL của nó bị xóa
-					imageService.delete(existingImages.get(i));
-				}
-			}
-		} catch (Exception e) {
-			// Không làm gì cả
-		}
+		productService.save(product);
+
+//		try {
+//			// Lưu thông tin sản phẩm
+//			productService.save(product);
+//
+//			// Xử lý các ảnh
+//			List<Image> existingImages = imageService.getImagesByProductId(product.getProduct_id());
+//			for (int i = 0; i < imageSources.length; i++) {
+//				String imageSource = imageSources[i];
+//				if (imageSource != null && !imageSource.trim().isEmpty()) {
+//					if (i < existingImages.size()) {
+//						// Cập nhật ảnh hiện có
+//						existingImages.get(i).setImage_src(imageSource);
+//						imageService.save(existingImages.get(i));
+//					} else {
+//						// Thêm ảnh mới
+//						Image image = new Image(null, product.getProduct_id(), imageSource, null);
+//						imageService.save(image);
+//					}
+//				} else if (i < existingImages.size()) {
+//					// Xóa ảnh nếu URL của nó bị xóa
+//					imageService.delete(existingImages.get(i));
+//				}
+//			}
+//		} catch (Exception e) {
+//			// Không làm gì cả
+//		}
 
 		return "redirect:/admin/category";
 	}
